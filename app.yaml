@@ -1,4 +1,4 @@
-application: homepage
+application: kellen-donohue
 version: 1
 runtime: php55
 api_version: 1
@@ -8,6 +8,21 @@ handlers:
 - url: /favicon\.ico
   static_files: favicon.ico
   upload: favicon\.ico
+  
+- url: /homepage.css
+  static_files: homepage.css
+  upload: homepage\.css
+  
+- url: /images
+  static_dir: images
+
+- url: /Resume.pdf
+  static_files: Resume.pdf
+  upload: Resume\.pdf
+  
+- url: /keybase.txt
+  static_files: keybase.txt
+  upload: keybase\.txt
 
 - url: .*
-  script: main.php
+  script: index.html

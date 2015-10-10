@@ -1,0 +1,112 @@
+/* 
+    Document   : homepage
+    Created on : May 26, 2009, 2:38:22 PM
+    Author     : Kellen Donohue
+    Description: Style sheets
+*/
+
+#aboutMe .column {
+    width: 50%;
+}
+
+body {
+    background-color: #003F87;
+    color: white;
+    font-family: Calibri, Tahoma, sans-serif;
+    font-size: 12pt;
+    margin: 10px;
+    text-align: center;
+}
+
+#intro {
+  position: relative;
+}
+
+#intro, #mainContent {
+  margin-left: 4%;
+}
+
+.box {
+    margin: 0 10px;
+    border: 5px solid;
+    background-color: blue;
+    padding: 10px;
+}
+
+.left {
+  width: 44%;
+}
+
+.right {
+  width: 46%;
+  left: 48%;
+  top: 0;
+  position: absolute;
+}
+
+h2 {
+    margin: 0px;
+}
+
+.invisibleBox {
+    margin: 10px;
+    padding: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    border: 5px  solid #003F87;
+}
+
+#mainContent {
+    margin-top: 20px;
+    position: relative;
+}
+
+#name {
+    height: 200px;
+    line-height: 200px;
+    margin: 0;
+    padding: 0px;
+}
+
+table {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#topPic {
+    border:  5px solid;
+}
+
+
+#w3c {
+    bottom: 1px;
+    right: 1px;
+    position: fixed;
+}
+
+#w3c img {
+    border-style: none;
+}
+
+a {
+    color: lightgrey;
+}
+
+@media screen and (max-width: 700px) {
+  .left, .right {
+    width: 92%;
+    position: static;
+  }
+  
+  .box {
+    margin: 0;
+  }
+
+  body {
+    margin-left: 0;
+  }
+
+  #contactInfo {
+    margin-top: 20px;
+  }
+}

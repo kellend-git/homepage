@@ -1,0 +1,67 @@
+==================================================================
+==================================================================
+https://keybase.io/kellend
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://keybase.kellendonohue.com
+  * I am kellend (https://keybase.io/kellend) on keybase.
+  * I have a public key with fingerprint 12D8 488F 3FE2 B174 23A2  C4CE D748 666D 36FE D9E5
+
+To claim this, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "fingerprint": "12d8488f3fe2b17423a2c4ced748666d36fed9e5",
+            "host": "keybase.io",
+            "key_id": "d748666d36fed9e5",
+            "uid": "d6b58eb5e319af2c4d07195a3f4ec400",
+            "username": "kellend"
+        },
+        "service": {
+            "hostname": "keybase.kellendonohue.com",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1413420952,
+    "expire_in": 157680000,
+    "prev": "b107112d92f2b6d65ccc4c837d01c5f373e2f83a0b8854c77737cfe823faf290",
+    "seqno": 6,
+    "tag": "signature"
+}
+
+with the aforementioned key, yielding the PGP signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v1.1.3
+Comment: https://keybase.io/crypto
+
+yMHqAnicbZFbSBRRGMd311uulBVSCkU50kOo29wv22U1zR4i6LJEoLbM5czu1O7M
+ujujybYZhKkUgj5YWBtGQlKRaWRoLybShV7EhzKFrciKbNEwCozUzqj11Hk5nO/8
+v9//uwyvTrLYrfZ9sy+EDbcD1peD84bF7dp4JYIImlSLOCPIKbB0yYrqBaFgSFF1
+xIlguMSSLCsTMsAFjCFxgsdFUgQSQ7I0TUsELQOJAxRSgPi0sJkBMQIfBg5FgzH4
+8CgSjP5Hbyx/0ALFAoECBMbxMmRLKINxFE/IJBBJFDWFYRBS+QBYgvv9QJWQaAEC
+g9WKCMySTed/gmX3FaGmaj4DOEQtADnBkKZrouaHMp+uB50mRa8Nmmk1QPCsAD2C
+okpwBjChGoTCiqYiTgwqRV0xHTASI0gc5Si8AAGng0oIeBRTQTE0i8Jj2oBqiBQw
+2AgcH4fLuEBLNCWKcHAswUgoJlIywRAAl1mCRwWWpUiRYRiCEWXA4oQM58CZjYdB
+laohThqWyXshMqx4VV43QgCJDg1WJFusdktqis3cosWevvbvbu80pi1KiWhZex3Z
+8qir9H5Wpquvvm8glqic7QiUthUu5G6a2epPTBwo6q0R+7sWHh7N+NJgTF9ftS23
+ZD7bu7k7tqbh8QUf4FzBeEv/PVtWcUOJ5LD09x6hplyH2t0VnyNPyMns5rs9c7bk
+tM720a7u1BM7vu36Kr+fmfoQz3OUPd20bqbn3eXfbVtu1p9NmiucbPzUTL39cdHT
+emYkNoyOsscW36w/b/Ue16ZvHd5+qcPIGXtWlzuUHrvWMf8znnMyxTNXzuU1Jbvc
+lHtvb+G4ET9YXvzr1fDA91jOniJbxohnd+fridnIczxa+XEsP3O8tbTpwWBUym/d
+eW5/442rVYk/3QQZrA==
+=c0E7
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/kellend
+
+==================================================================
+
