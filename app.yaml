@@ -24,5 +24,9 @@ handlers:
   static_files: keybase.txt
   upload: keybase\.txt
 
+- url: /code.html
+  static_files: code.html
+  upload: code\.html
+
 - url: .*
   script: index.html
