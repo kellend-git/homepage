@@ -44,6 +44,11 @@ body {
   position: absolute;
 }
 
+#resume {
+  margin-top: 20px;
+  top: 250px;
+}
+
 h2 {
     margin: 0px;
 }
