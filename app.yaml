@@ -26,5 +26,9 @@ handlers:
   static_files: code.html
   upload: code\.html
 
+- url: /robots.txt
+  static_files: robots.txt
+  upload: robots\.txt
+
 - url: .*
   script: index.html
