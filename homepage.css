@@ -82,17 +82,6 @@ table {
     border:  5px solid;
 }
 
-
-#w3c {
-    bottom: 1px;
-    right: 1px;
-    position: fixed;
-}
-
-#w3c img {
-    border-style: none;
-}
-
 a {
     color: lightgrey;
 }
