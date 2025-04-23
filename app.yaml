@@ -1,6 +1,6 @@
 runtime: php83
 api_version: 1
-threadsafe: yes
+max_instances: 10
 
 handlers:
 - url: /favicon\.ico
