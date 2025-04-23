@@ -17,6 +17,10 @@ handlers:
 - url: /Resume.pdf
   static_files: Resume.pdf
   upload: Resume\.pdf
+
+- url: /patent.pdf
+  static_files: patent.pdf
+  upload: patent\.pdf
   
 - url: /keybase.txt
   static_files: keybase.txt
