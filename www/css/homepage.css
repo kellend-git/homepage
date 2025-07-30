@@ -4,18 +4,25 @@
     Author     : Kellen Donohue
     Description: Style sheets
 */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 #aboutMe .column {
     width: 50%;
 }
 
 body {
-    background-color: #003F87;
-    color: white;
-    font-family: Calibri, Tahoma, sans-serif;
-    font-size: 12pt;
-    margin: 10px;
-    text-align: center;
+  line-height: 1;
+}
+
+body {
+  background-color: #003F87;
+  color: white;
+  font-family: "Open Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 12pt;
+  margin: 10px;
+  text-align: center;
 }
 
 #intro {
