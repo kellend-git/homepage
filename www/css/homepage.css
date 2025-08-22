@@ -1,24 +1,42 @@
-/* 
+/*
     Document   : homepage
     Created on : May 26, 2009, 2:38:22 PM
     Author     : Kellen Donohue
     Description: Style sheets
 */
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 #aboutMe .column {
     width: 50%;
+}
+
+.open-sans {
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	src: url('DroidSerif-BoldItalic-webfont.ttf') format('truetype');
+	font-weight: bold;
+	font-style: italic;
 }
 
 body {
   background-color: #003F87;
   color: white;
   font-family: "Open Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-  font-weight: normal;
+  font-weight: 400;
   font-style: normal;
   font-size: 11pt;
   margin: 10px;
   text-align: center;
+}
+
+strong {
+  font-family: "Open Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  font-style: normal;
 }
 
 #intro {
@@ -107,7 +125,7 @@ a {
     width: 92%;
     position: static;
   }
-  
+
   .box {
     margin: 0;
   }
