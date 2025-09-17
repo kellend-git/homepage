@@ -1,6 +1,6 @@
 # Use of php here is for legacy reasons and to keep the repo simple.
 # No php is used in serving the site.
-runtime: php83
+runtime: php84
 automatic_scaling:
   min_instances: 1
   max_instances: 5
