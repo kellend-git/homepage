@@ -8,6 +8,8 @@ handlers:
   - url: /
     static_files: www/index.html
     upload: www/index.html
+    secure: always
+    redirect_http_response_code: 301
   - url: /Resume.pdf
     static_files: www/KellenDonohueResume.pdf
     upload: www/KellenDonohueResume.pdf
