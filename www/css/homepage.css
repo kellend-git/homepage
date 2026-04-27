@@ -69,7 +69,7 @@ h2 {
     padding: 10px;
     padding-bottom: 5px;
     padding-top: 5px;
-    border: 5px solid #003F87;
+    border: 5px solid transparent;
 }
 
 #mainContent {
@@ -101,7 +101,7 @@ h2 {
 }
 
 #topPic {
-    border:  5px solid;
+    border: 5px solid transparent;
 }
 
 @media screen and (max-width: 700px) {
@@ -121,5 +121,9 @@ h2 {
   #contactInfo {
     margin-top: 20px;
     overflow: scroll;
+  }
+
+  .invisibleBox {
+    margin: 0;
   }
 }
