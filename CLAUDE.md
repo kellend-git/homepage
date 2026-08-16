@@ -27,16 +27,16 @@ keyboard focus.
 The same directory is published two different ways, so a change to routing or
 asset paths must work under both:
 
-1. **Google App Engine** — `app.yaml` + `./deploy.sh` (`gcloud app deploy`),
-   serving www.kellendonohue.com. Routing: `/` → `www/index.html`,
+1. **Google App Engine** — `app.yaml` + `./deploy.sh` (`gcloud app deploy`).
+   This is what currently serves both live domains. Routing: `/` → `www/index.html`,
    `/Resume.pdf` → `www/KellenDonohueResume.pdf` (an alias that exists *only*
    here), `/(.*)` → `www/\1`. The `php84` runtime is vestigial — no PHP is
    executed.
 2. **GitHub Pages** — `.github/workflows/pages.yml` uploads `./www` verbatim on
    push to `homepage-redesign-preview` (or `workflow_dispatch`). No `app.yaml`
-   routing and no `/Resume.pdf` alias. `www/CNAME` claims the apex domain
-   `kellend.com`, which only takes effect once that domain's DNS points at
-   GitHub — see below.
+   routing, no `/Resume.pdf` alias, and no `CNAME` — Pages serves from
+   `kellend-git.github.io/homepage`. See the domain notes below before adding
+   one.
 
 Consequence: link assets with plain relative paths (`KellenDonohueResume.pdf`,
 `css/homepage.css`), never `/Resume.pdf` or other App-Engine-only routes.
@@ -59,10 +59,12 @@ that serve this site off App Engine. Verified Aug 2026:
   Squarespace is the registrar (it acquired Google Domains in 2023); DNS hosting
   stayed with Google.
 
-`www/CNAME` declares `kellend.com` as the Pages custom domain, but Pages cannot
-serve it until those apex A records are repointed to GitHub
-(`185.199.108-111.153`). Until then Pages serves from
-`kellend-git.github.io/homepage` and App Engine keeps serving both domains.
+There is deliberately **no `www/CNAME`**. Adding one declares a Pages custom
+domain, but Pages cannot serve it until those apex A records are repointed to
+GitHub (`185.199.108-111.153`) — and setting a custom domain makes GitHub
+redirect `kellend-git.github.io/homepage` to it, which would break the preview
+URL before the DNS cutover. So the order is: repoint DNS first, add `CNAME`
+second. `tests/test_site.py` validates the file's contents once it exists.
 
 ## Branch layout
 
