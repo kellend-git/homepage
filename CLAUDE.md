@@ -34,7 +34,9 @@ asset paths must work under both:
    executed.
 2. **GitHub Pages** — `.github/workflows/pages.yml` uploads `./www` verbatim on
    push to `homepage-redesign-preview` (or `workflow_dispatch`). No `app.yaml`
-   routing, no `/Resume.pdf` alias, no `CNAME`.
+   routing and no `/Resume.pdf` alias. `www/CNAME` claims the apex domain
+   `kellend.com`, which only takes effect once that domain's DNS points at
+   GitHub — see below.
 
 Consequence: link assets with plain relative paths (`KellenDonohueResume.pdf`,
 `css/homepage.css`), never `/Resume.pdf` or other App-Engine-only routes.
@@ -42,6 +44,25 @@ Consequence: link assets with plain relative paths (`KellenDonohueResume.pdf`,
 The canonical URL and all `og:`/`twitter:` metadata in `www/index.html` point at
 `https://kellend.com`. Keep the title/description/OG triplet consistent when
 editing any of them, and regenerate `www/og.png` if the tagline changes.
+
+### Domain state
+
+Both `kellend.com` and `kellendonohue.com` are Squarespace-registered domains
+that serve this site off App Engine. Verified Aug 2026:
+
+- Both apexes have A records to `216.239.32-38.21` (App Engine) and return 200
+  directly. `www.kellend.com` is a CNAME to `ghs.googlehosted.com`.
+- `www.kellendonohue.com` is a CNAME to `ext-sq.squarespace.com`, which 301s to
+  `http://kellendonohue.com/` — Squarespace forwarding on that one hostname only.
+- Authoritative nameservers for both are `ns-cloud-*.googledomains.com`, so
+  records are edited in **Google Cloud DNS**, not in Squarespace's DNS panel.
+  Squarespace is the registrar (it acquired Google Domains in 2023); DNS hosting
+  stayed with Google.
+
+`www/CNAME` declares `kellend.com` as the Pages custom domain, but Pages cannot
+serve it until those apex A records are repointed to GitHub
+(`185.199.108-111.153`). Until then Pages serves from
+`kellend-git.github.io/homepage` and App Engine keeps serving both domains.
 
 ## Branch layout
 
