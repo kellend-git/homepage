@@ -5,8 +5,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## What this is
 
 Kellen Donohue's personal homepage: a hand-written static site. No build step, no
-package manager, no dependencies, no tests. Everything served lives in `www/`;
-files at the repo root are deployment config only.
+package manager, no third-party dependencies. Everything served lives in `www/`;
+files at the repo root are deployment config or tests.
 
 `www/index.html` and `www/css/homepage.css` are the entire site. There is no
 JavaScript on the page (the README's mention of Google Analytics JS is stale —
@@ -21,6 +21,40 @@ python3 -m http.server -d www 8000   # then open http://localhost:8000
 Verify at both breakpoints (see CSS section) and check the sticky header, the
 `#work`/`#education`/`#research` anchor scrolling, and the `.skip-link` on
 keyboard focus.
+
+## Tests
+
+```sh
+python3 -m unittest discover -s tests                   # all checks
+python3 -m unittest tests.test_site.TestMetadata -v     # one class
+python3 -m unittest tests.test_site.TestReferences.test_no_absolute_local_paths
+```
+
+`tests/test_site.py` is stdlib-only (`unittest` + `html.parser`) — deliberately
+no pytest, to keep the repo free of a package manager. It parses
+`www/index.html` once at import and asserts on the result.
+
+The `validate` job in `.github/workflows/pages.yml` runs it and gates `deploy`,
+so a broken reference fails the workflow instead of shipping. What it covers:
+
+- Every relative `href`/`src` resolves to a real file in `www/`, and no local
+  reference is absolute (the App Engine / Pages divergence below).
+- `<title>`, `og:title`, and `twitter:title` agree; `canonical` matches
+  `og:url`; social images are absolute URLs on the canonical host that exist on
+  disk; `meta theme-color` matches `site.webmanifest`.
+- a11y invariants: one `.skip-link` pointing at a real `id`, non-empty `alt` on
+  every image, `aria-hidden` on spans containing only decorative glyphs, and
+  `rel=noopener` on every `target="_blank"`.
+- Every class used in the HTML exists in `homepage.css`. One dormant check
+  validates `www/CNAME` and skips while that file is absent.
+
+Two deliberate omissions. `name="description"` is intentionally longer than
+`og:description`, so only the two social variants are compared. External links
+are not checked at all — LinkedIn and lens.org return 403 to CI, which would
+make the gate flaky without adding signal.
+
+When adding a check, mutation-test it: break the thing in a scratch copy and
+confirm the suite goes red. A check that cannot fail is worse than no check.
 
 ## Two deploy targets, one `www/`
 

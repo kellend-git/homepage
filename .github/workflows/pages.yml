@@ -16,8 +16,23 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  validate:
+    name: Validate site
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      # Uses the python3 preinstalled on the runner: the repo has no package
+      # manager and the tests are stdlib-only, so there is nothing to install.
+      - name: Run site validation tests
+        run: python3 -m unittest discover -s tests -v
+
   deploy:
     name: Deploy static site
+    needs: validate
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment:
