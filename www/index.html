@@ -7,6 +7,15 @@
     <meta name="description" content="Kellen Donohue is a forward deployed software engineer building enterprise data systems, AI-powered workflows, and real-time decision tools." />
     <meta name="author" content="Kellen Donohue" />
     <meta name="theme-color" content="#075cd6" />
+    <script>
+      (() => {
+        try {
+          const savedTheme = localStorage.getItem("theme");
+          const theme = savedTheme || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          document.documentElement.dataset.theme = theme;
+        } catch (_) {}
+      })();
+    </script>
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Kellen Donohue — Forward Deployed Software Engineer" />
     <meta property="og:description" content="Building enterprise data systems, AI-powered workflows, and real-time decision tools." />
@@ -30,7 +39,18 @@
       <nav class="nav shell" aria-label="Primary navigation">
         <a class="brand" href="#top" aria-label="Kellen Donohue, home"><span class="brand-mark" aria-hidden="true">KD</span><span>Kellen Donohue</span></a>
         <div class="nav-links"><a href="#work">Work</a><a href="#education">Education</a><a href="#research">Research</a></div>
-        <a class="button button-small" href="KellenDonohueResume.pdf" target="_blank" rel="noopener">Resume <span aria-hidden="true">↗</span></a>
+        <div class="nav-actions">
+          <button class="theme-toggle" type="button" role="switch" aria-label="Color theme: Light. Switch to dark mode" aria-checked="false">
+            <span class="theme-thumb" aria-hidden="true"></span>
+            <span class="theme-option theme-option-light" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path></svg>
+            </span>
+            <span class="theme-option theme-option-dark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+            </span>
+          </button>
+          <a class="button button-small" href="KellenDonohueResume.pdf" target="_blank" rel="noopener">Resume <span aria-hidden="true">↗</span></a>
+        </div>
       </nav>
     </header>
 
@@ -104,5 +124,34 @@
     </main>
 
     <footer class="footer"><div class="shell footer-inner"><p>© 2026 Kellen Donohue</p><div><a href="https://linkedin.com/in/kellend" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/kellend-git" target="_blank" rel="noopener">GitHub</a><a href="mailto:mail@kellend.com">Email</a></div></div></footer>
+    <script>
+      (() => {
+        const root = document.documentElement;
+        const toggle = document.querySelector(".theme-toggle");
+        const themeColor = document.querySelector('meta[name="theme-color"]');
+
+        const applyTheme = (theme) => {
+          const isDark = theme === "dark";
+          root.dataset.theme = theme;
+          toggle.setAttribute("aria-checked", String(isDark));
+          toggle.setAttribute("aria-label", `Color theme: ${isDark ? "Dark" : "Light"}. Switch to ${isDark ? "light" : "dark"} mode`);
+          themeColor.setAttribute("content", isDark ? "#07111f" : "#075cd6");
+        };
+
+        applyTheme(root.dataset.theme || "light");
+        toggle.addEventListener("click", () => {
+          const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
+          applyTheme(nextTheme);
+          try { localStorage.setItem("theme", nextTheme); } catch (_) {}
+        });
+
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
+        systemTheme.addEventListener("change", (event) => {
+          try {
+            if (!localStorage.getItem("theme")) applyTheme(event.matches ? "dark" : "light");
+          } catch (_) {}
+        });
+      })();
+    </script>
   </body>
 </html>
