@@ -133,6 +133,18 @@ class TestReferences(unittest.TestCase):
                         "App Engine resolves it but GitHub Pages will not",
                     )
 
+    def test_css_local_assets_exist(self):
+        css = CSS.read_text(encoding="utf-8")
+        for raw in re.findall(r"url\(([^)]+)\)", css):
+            value = raw.strip().strip("\"'")
+            if not value or value.startswith(("data:", "http://", "https://", "#")):
+                continue
+            with self.subTest(ref=value):
+                self.assertTrue(
+                    (CSS.parent / local_path(value)).resolve().exists(),
+                    f'CSS url("{value}") does not resolve from {CSS.parent}',
+                )
+
     def test_fragment_links_resolve(self):
         for value in (v for _, attr, v in PAGE.refs if attr == "href" for v in [v]):
             if value.startswith("#") and len(value) > 1:

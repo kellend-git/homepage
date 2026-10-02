@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Contract specification research architecture</title>
+  <desc id="desc">Observed contract practice and a pipeline from instrumented .NET programs through Celeriac and Daikon to developer decisions and design recommendations.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#06469f"/><stop offset="1" stop-color="#0870e9"/></linearGradient>
+    <linearGradient id="node" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0a5bc8"/><stop offset="1" stop-color="#083f91"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dy="8" stdDeviation="12" flood-color="#021b41" flood-opacity=".28"/></filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0l10 5-10 5z" fill="#b9ddff"/></marker>
+    <style>
+      .edge{fill:none;stroke:#b9ddff;stroke-width:4;stroke-linecap:round;opacity:.72;marker-end:url(#arrow)}
+      .soft{fill:none;stroke:#b9ddff;stroke-width:3;stroke-dasharray:9 10;opacity:.48;marker-end:url(#arrow)}
+      .node{fill:url(#node);stroke:#a9d5ff;stroke-width:2;filter:url(#shadow)}
+      .pill{fill:#0b438f;stroke:#8dc5ff;stroke-width:2}
+      .eyebrow{font:700 18px Inter,system-ui,sans-serif;letter-spacing:2px;fill:#9ed1ff}
+      .label{font:700 26px Inter,system-ui,sans-serif;fill:#f2f8ff}
+      .detail{font:500 18px Inter,system-ui,sans-serif;fill:#c9e5ff}
+      .small{font:600 16px Inter,system-ui,sans-serif;fill:#d9edff}
+    </style>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <g opacity=".12" fill="none" stroke="#d9edff"><circle cx="1430" cy="90" r="190"/><circle cx="1430" cy="90" r="135"/><path d="M0 840c330-150 520 110 850-30s480-90 750 25" stroke-width="3"/></g>
+
+  <path class="edge" d="M378 122h62M798 122h62"/>
+  <rect class="node" x="50" y="55" width="328" height="134" rx="20"/><text x="80" y="94" class="eyebrow">OBSERVED PRACTICE</text><text x="80" y="136" class="label">90 C# projects</text><text x="80" y="166" class="detail">43,823 contract clauses</text>
+  <rect class="node" x="440" y="55" width="358" height="134" rx="20"/><text x="470" y="94" class="eyebrow">CONTRACT CONTENT</text><text x="470" y="136" class="label" style="font-size:22px">73% check data presence</text><text x="470" y="166" class="detail">68% pre · 26% post · 6% invariants</text>
+  <rect class="node" x="860" y="55" width="294" height="134" rx="20"/><text x="890" y="94" class="eyebrow">SPECIFICATION GAP</text><text x="890" y="136" class="label">Richer properties</text><text x="890" y="166" class="detail">could be expressed</text>
+  <path class="soft" d="M1154 122h50V82h35M1154 122h85M1154 122h50v40h35"/>
+  <rect class="pill" x="1239" y="49" width="300" height="50" rx="14"/><text x="1262" y="81" class="small">State update constraints</text>
+  <rect class="pill" x="1239" y="106" width="300" height="50" rx="14"/><text x="1262" y="138" class="small">Object-state indicators</text>
+  <rect class="pill" x="1239" y="163" width="300" height="50" rx="14"/><text x="1262" y="195" class="small">Conditional properties</text>
+
+  <text x="50" y="288" class="eyebrow">INFERENCE AND REVIEW PIPELINE</text>
+  <path class="soft" d="M1062 328v-78h-55v-61"/>
+  <path class="edge" d="M293 400h62M588 400h62M883 400h62M1178 400h62"/>
+  <rect class="node" x="50" y="328" width="243" height="144" rx="20"/><text x="80" y="371" class="eyebrow">INPUT</text><text x="80" y="413" class="label">.NET binaries</text><text x="80" y="444" class="detail">Program executions</text>
+  <rect class="node" x="355" y="328" width="233" height="144" rx="20"/><text x="385" y="371" class="eyebrow">INSTRUMENT</text><text x="385" y="413" class="label">Celeriac</text><text x="385" y="444" class="detail">Observe runtime values</text>
+  <rect class="node" x="650" y="328" width="233" height="144" rx="20"/><text x="680" y="371" class="eyebrow">TRACE</text><text x="680" y="413" class="label">Daikon format</text><text x="680" y="444" class="detail">Comparable variables</text>
+  <rect class="node" x="945" y="328" width="233" height="144" rx="20"/><text x="975" y="371" class="eyebrow">INFER</text><text x="975" y="413" class="label">Daikon</text><text x="975" y="444" class="detail">Likely contracts</text>
+  <rect class="node" x="1240" y="328" width="300" height="144" rx="20"/><text x="1270" y="371" class="eyebrow">PRESENT</text><text x="1270" y="413" class="label">Contract Inserter</text><text x="1270" y="444" class="detail">Visual Studio suggestions</text>
+
+  <path class="edge" d="M1390 472v53"/>
+  <polygon class="node" points="1390,525 1535,608 1390,691 1245,608"/><text x="1317" y="601" class="eyebrow">DEVELOPER</text><text x="1330" y="636" class="label">Decision</text>
+  <path class="soft" d="M1245 608h-94M1390 691v55M1535 608h32"/>
+  <rect class="pill" x="877" y="550" width="274" height="50" rx="14"/><text x="900" y="582" class="small">Insert as contract</text>
+  <rect class="pill" x="877" y="614" width="274" height="50" rx="14"/><text x="900" y="646" class="small">Insert as documentation</text>
+  <rect class="pill" x="1273" y="746" width="267" height="50" rx="14"/><text x="1296" y="778" class="small">Reject or ignore</text>
+
+  <rect class="node" x="50" y="702" width="690" height="144" rx="20"/><text x="80" y="744" class="eyebrow">DESIGN RECOMMENDATIONS</text><text x="80" y="786" class="label">Reduce annotation burden</text><text x="80" y="817" class="detail">Rank and explain suggestions · curate specification patterns</text>
+  <path class="soft" d="M877 639h-70v135h-67"/>
+</svg>
