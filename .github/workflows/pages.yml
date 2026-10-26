@@ -3,7 +3,7 @@ name: Deploy homepage to GitHub Pages
 on:
   push:
     branches:
-      - homepage-redesign-preview
+      - master
   workflow_dispatch:
 
 permissions:
