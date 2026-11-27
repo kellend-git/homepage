@@ -1,4 +1,45 @@
 (() => {
+  function trackHomepageSection(header) {
+    const primaryNav = header.querySelector(".site-primary-nav");
+    const workNav = header.querySelector(".site-work-nav");
+    const sections = [...primaryNav.querySelectorAll(".site-primary-links a")].map((link) => ({
+      link,
+      section: document.getElementById(link.hash.slice(1)),
+    }));
+    let active;
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+      // Measure from the primary row so appearing and disappearing never move the threshold.
+      const readingLine = primaryNav.getBoundingClientRect().bottom + workNav.offsetHeight + 20;
+      const next = sections.find(({ section }) => {
+        const { top, bottom } = section.getBoundingClientRect();
+        return top <= readingLine && bottom > readingLine;
+      });
+      if (next === active) return;
+
+      active?.link.removeAttribute("aria-current");
+      next?.link.setAttribute("aria-current", "location");
+      active = next;
+
+      const showWork = active?.section.id === "work";
+      if (!showWork && workNav.contains(document.activeElement)) {
+        (active?.link ?? sections[0].link).focus({ preventScroll: true });
+      }
+      workNav.inert = !showWork;
+      header.classList.toggle("site-work-visible", showWork);
+    };
+    const scheduleUpdate = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+    window.addEventListener("pageshow", scheduleUpdate);
+    scheduleUpdate();
+  }
+
   const root = document.documentElement;
   const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
   const savedTheme = () => {
@@ -41,6 +82,9 @@
         menu.querySelector("summary").focus();
       }
     });
+
+    const homeHeader = document.querySelector(".site-home-header");
+    if (homeHeader) trackHomepageSection(homeHeader);
 
     const printableDetails = [...document.querySelectorAll("#selected-work details")];
     let closedBeforePrint = [];

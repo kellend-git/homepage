@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#07111f">
 <meta name="description" content="Postman Bootstrap turns recorded legacy API behavior into a repeatable release check for migrations.">
-<title>Postman Bootstrap | Kellen Donohue</title>
+<title>Catching silent regressions in API migrations | Kellen Donohue</title>
 <style>
   :root {
     color-scheme: dark;
@@ -29,8 +29,8 @@
   body { margin: 0; background: var(--page); color: var(--ink); font: 1rem/1.6 var(--body); }
   p, h1, h2, h3, figure, dl, dd { margin: 0; }
   h1, h2, h3 { line-height: 1.13; font-family: var(--display); letter-spacing: -.035em; }
-  h1 { max-width: 18ch; font-size: clamp(2.75rem, 7vw, 5.2rem); }
-  h1 span { color: var(--accent); white-space: nowrap; }
+  h1 { max-width: 24ch; font-size: clamp(2.75rem, 7vw, 5.2rem); }
+  h1 span { color: var(--accent); }
   h2 { font-size: clamp(1.75rem, 4vw, 2.6rem); }
   h3 { font-size: 1.12rem; letter-spacing: -.015em; }
   a { color: var(--link); text-underline-offset: .22em; }
@@ -156,16 +156,16 @@
       <span class="site-work-label">Postman work</span>
       <a href="lightyear.html">Lightyear</a>
       <a href="prospect-pipeline.html">Prospect Pipeline</a>
-      <a href="postman-bootstrap.html" aria-current="page">Postman Bootstrap</a>
+      <a href="postman-bootstrap.html" aria-current="page">API Migration Safety</a>
     </div>
   </nav>
 </header>
 <main id="main">
   <section class="overview" id="overview" aria-labelledby="title">
     <div class="shell">
-      <p class="kicker">Postman Bootstrap · API migration</p>
-      <h1 id="title">The migration changed the fee by <span>one cent.</span></h1>
-      <p class="lede">In this example, two versions of an API calculate the same $20.645 fee before rounding. The legacy service rounds a tie to the even cent. The replacement rounds it up. Both return a valid number, so the response schema accepts either result.</p>
+      <p class="kicker">Postman · API migration</p>
+      <h1 id="title">Catching silent regressions in <span>API migrations</span></h1>
+      <p class="lede">In this example, the migration changed a fee by one cent. Both versions of the API calculate the same $20.645 fee before rounding. The legacy service rounds a tie to the even cent. The replacement rounds it up. Both return a valid number, so the response schema accepts either result.</p>
       <nav class="site-project-tools" aria-label="Project page sections">
         <a href="#overview">Overview</a>
         <a href="#technical">Technical details</a>
@@ -237,7 +237,7 @@
           <li><a href="https://docs.aws.amazon.com/transform/latest/userguide/custom.html">AWS Transform custom documentation</a></li>
         </ul>
       </section>
-      <footer class="footer-line"><a href="https://kellend.com/">Kellen Donohue</a><span>Postman Bootstrap case study</span></footer>
+      <footer class="footer-line"><a href="https://kellend.com/">Kellen Donohue</a><span>API Migration Safety</span></footer>
     </div>
   </section>
 </main>
