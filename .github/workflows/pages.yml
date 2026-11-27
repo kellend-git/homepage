@@ -50,6 +50,9 @@ jobs:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
+      - name: Add legacy resume URL
+        run: cp www/KellenDonohueResume.pdf www/Resume.pdf
+
       - name: Upload website
         uses: actions/upload-pages-artifact@v4
         with:

@@ -1,6 +1,6 @@
-This repo hosts the source code for my personal homepage, which you can find at http://www.kellendonohue.com.
+The source for Kellen Donohue’s [personal homepage](https://kellend.com/).
 
-Architecture-wise the homepage is a simple HTML5/CSS static page, with a tiny bit of JS for Google Analytics. It utilizes responsive CSS to be mobile-friendly. The website is deployed on Google App Engine.
+The static site lives in `www/`. GitHub Actions validates and publishes it to GitHub Pages on pushes to `master`.
 
-Besides the resources for the homepage (including my resume) there is code for toy webapps I was creating and configuration for the Google App Engine deployment.
-
+Preview it with `python3 -m http.server -d www 8000`. Run the site checks with
+`python3 -m unittest discover -s tests`.
