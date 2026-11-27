@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#07111f">
+<meta name="description" content="A case study in turning account evidence into ranked sales shortlists and source-backed briefs.">
+<title>Prospect Pipeline | Kellen Donohue</title>
+<style>
+  :root {
+    color-scheme: dark;
+    --page: #07111f;
+    --surface: #0d1a2b;
+    --line: #243951;
+    --ink: #eef5ff;
+    --muted: #a9b8cd;
+    --accent: #73acff;
+    --link: #9bc5ff;
+    --button: #1264d5;
+    --display: "Avenir Next", Avenir, "Trebuchet MS", sans-serif;
+    --body: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--page); color: var(--ink); font: 1rem/1.6 var(--body); }
+  p, h1, h2, h3, figure, blockquote, dl, dd { margin: 0; }
+  h1, h2, h3 { line-height: 1.13; font-family: var(--display); letter-spacing: -.035em; }
+  h1 { font-size: clamp(2.8rem, 7vw, 5.25rem); }
+  h2 { font-size: clamp(1.75rem, 4vw, 2.6rem); }
+  h3 { font-size: 1.12rem; letter-spacing: -.015em; }
+  a { color: var(--link); text-underline-offset: .22em; }
+  a:hover { color: var(--ink); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  .shell { width: min(100% - 3rem, 1056px); margin-inline: auto; }
+  .masthead { border-bottom: 1px solid var(--line); }
+  .masthead .shell, .footer-line { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px 24px; }
+  .masthead .shell { min-height: 74px; padding-block: 10px; }
+  .brand { display: inline-flex; align-items: center; gap: 11px; color: var(--ink); font-weight: 700; text-decoration: none; }
+  .brand-mark { display: grid; place-items: center; width: 38px; height: 38px; background: var(--button); color: #fff; border-radius: 8px; font-size: .8rem; }
+  .masthead nav { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; font-size: .9rem; }
+  .masthead nav a { text-decoration: none; font-weight: 650; }
+  .pdf-link { border: 1px solid var(--line); padding: .45rem .8rem; border-radius: 8px; color: var(--ink); }
+  .pdf-link:hover { border-color: var(--accent); }
+  .overview, .technical { padding-block: clamp(3rem, 7vw, 5rem); }
+  .overview { border-bottom: 1px solid var(--line); background: radial-gradient(ellipse at 88% 0, #143664 0%, transparent 48%), linear-gradient(#081523, #0a1c34); }
+  .kicker { margin-bottom: .8rem; color: var(--accent); font-weight: 750; font-size: .875rem; letter-spacing: .105em; text-transform: uppercase; }
+  .hero-subtitle { margin-top: .7rem; color: var(--accent); font: 700 clamp(1.35rem, 3vw, 2.05rem)/1.2 var(--display); letter-spacing: -.02em; }
+  .lede { margin-top: .8rem; max-width: 69ch; color: var(--muted); font-size: 1.08rem; }
+  .section-gap { margin-top: clamp(2rem, 5vw, 3.25rem); }
+  .overview-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: stretch; gap: 1.2rem; }
+  .panel { border: 1px solid var(--line); border-radius: 8px; background: var(--surface); padding: clamp(1rem, 3vw, 1.6rem); }
+  .panel h2 { font-size: clamp(1.45rem, 3vw, 1.85rem); }
+  .panel h2 + p { margin-top: .45rem; }
+  .note { margin-top: .7rem; color: var(--muted); font-size: .9rem; }
+  .funnel { margin-top: .85rem; }
+  .funnel-row { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: .15rem .8rem; padding-block: .48rem; border-bottom: 1px solid var(--line); }
+  .funnel-row dt { color: var(--muted); }
+  .funnel-row dd { color: var(--accent); font: 700 1.36rem/1.2 Arial, sans-serif; font-variant-numeric: tabular-nums; }
+  .brief { border-color: #4d80be; background: #102744; }
+  .brief-label { margin-bottom: .35rem; color: var(--link); font-weight: 700; font-size: .87rem; }
+  blockquote { margin: .8rem 0; border-left: 2px solid var(--accent); padding-left: .75rem; font-style: italic; }
+  .brief dl > div + div { margin-top: .42rem; }
+  .brief dt, .brief dd { display: inline; }
+  .brief dt { font-weight: 700; margin-right: .35em; }
+  .brief dd, .cards p, .steps p { color: var(--muted); }
+  .cards, .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: .9rem; }
+  .cards > div { border-top: 2px solid #4d80be; padding-top: .8rem; }
+  .cards p, .steps p { margin-top: .38rem; }
+  .steps { list-style: none; padding: 0; margin-bottom: 0; }
+  .steps li { border: 1px solid var(--line); border-radius: 8px; background: var(--surface); padding: 1rem; }
+  .steps li:nth-child(2) { border-color: #4d80be; background: #102744; }
+  .criteria { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 1.2rem; margin-top: .75rem; }
+  .criteria > div { border-top: 1px solid var(--line); padding: .58rem 0; }
+  .criteria dt { font-weight: 700; }
+  .criteria dd, .review { color: var(--muted); }
+  .review { margin-top: .55rem; max-width: 76ch; }
+  .source-links { list-style: none; display: flex; flex-wrap: wrap; gap: .3rem 1.15rem; margin: .3rem 0 0; padding: 0; }
+  .footer-line { margin-top: 1.4rem; border-top: 1px solid var(--line); padding-top: .7rem; color: var(--muted); font-size: .88rem; }
+  @media screen and (max-width: 680px) {
+    .shell { width: calc(100% - 2rem); }
+    .masthead .shell { padding-block: 13px; }
+    .overview-grid, .cards, .steps { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media screen and (max-width: 400px) {
+    .criteria { grid-template-columns: minmax(0, 1fr); }
+  }
+  @page { size: letter; margin: 0; }
+  @media print {
+    :root { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    body { font-size: 11pt; line-height: 1.44; }
+    .masthead { display: none; }
+    .shell { width: auto; margin: 0; }
+    .overview, .technical { padding: .65in .68in .48in; min-height: 11in; border: 0; }
+    .overview { break-after: page; }
+    .technical { background: var(--page); }
+    h1 { font-size: 47pt; }
+    h2 { font-size: 24pt; }
+    h3 { font-size: 12pt; }
+    .kicker { font-size: 10pt; margin-bottom: 10pt; }
+    .hero-subtitle { font-size: 18pt; }
+    .lede { font-size: 12pt; }
+    .section-gap { margin-top: 22pt; }
+    .overview-grid, .cards, .steps { gap: 10pt; }
+    .panel, .steps li { padding: 11pt; }
+    .panel h2 { font-size: 16pt; }
+    .funnel-row { padding-block: 5pt; }
+    .funnel-row dd { font-size: 13pt; }
+    .note, .brief-label { font-size: 9.5pt; }
+    .footer-line { font-size: 9pt; margin-top: 12pt; }
+    .overview-grid, .cards, .steps, .criteria, .footer-line { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="shell">
+    <a class="brand" href="https://kellend.com/"><span class="brand-mark" aria-hidden="true">KD</span> Kellen Donohue</a>
+    <nav aria-label="Page navigation">
+      <a href="#overview">Overview</a>
+      <a href="#technical">Technical details</a>
+      <a class="pdf-link" href="prospect-pipeline.pdf" download>Download PDF</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <section class="overview" id="overview" aria-labelledby="title">
+    <div class="shell">
+      <p class="kicker">Postman · Sales intelligence</p>
+      <h1 id="title">Prospect Pipeline</h1>
+      <p class="hero-subtitle">From a book of accounts to a shortlist a seller can act on.</p>
+      <p class="lede">For each sales play, the pipeline looks across account conversations, CRM notes, and product activity for a specific customer problem. It gives sellers a ranked shortlist with the evidence behind each pick and a question to ask next.</p>
+
+      <div class="overview-grid section-gap">
+        <figure class="panel" aria-labelledby="funnel-title">
+          <figcaption>
+            <h2 id="funnel-title">A sample funnel</h2>
+            <p class="note">Illustrative estimates for one sales play</p>
+          </figcaption>
+          <dl class="funnel">
+            <div class="funnel-row"><dt>Accounts scanned</dt><dd>About 10,000</dd></div>
+            <div class="funnel-row"><dt>In-depth reviews</dt><dd>A few hundred</dd></div>
+            <div class="funnel-row"><dt>Accounts shortlisted</dt><dd>A few dozen</dd></div>
+          </dl>
+          <p class="note">Actual volumes depend on the play and the evidence available.</p>
+        </figure>
+
+        <section class="panel brief" aria-labelledby="brief-title">
+          <p class="brief-label">Fictional example · Partner onboarding</p>
+          <h2 id="brief-title">What a seller gets</h2>
+          <blockquote>“Our team still walks each new partner through setup by hand.”</blockquote>
+          <dl>
+            <div><dt>Evidence</dt><dd>A discovery call describes repeated manual setup and validation.</dd></div>
+            <div><dt>Potential fit</dt><dd>A shared onboarding workspace with a reusable setup checklist.</dd></div>
+            <div><dt>First question</dt><dd>Which step usually delays a partner’s first successful API call?</dd></div>
+          </dl>
+        </section>
+      </div>
+
+      <section class="section-gap" aria-labelledby="plays-title">
+        <h2 id="plays-title">One pipeline, different sales plays</h2>
+        <div class="cards">
+          <div><h3>Partner onboarding</h3><p>Where do new partners get stuck before they can use an API?</p></div>
+          <div><h3>API governance</h3><p>Which teams struggle to apply shared standards across APIs?</p></div>
+          <div><h3>Developer workflows</h3><p>Where are manual tests and handoffs slowing down releases?</p></div>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <section class="technical" id="technical" aria-labelledby="technical-title">
+    <div class="shell">
+      <p class="kicker">Prospect Pipeline · Technical details</p>
+      <h2 id="technical-title">Search broadly, then read closely</h2>
+      <p class="lede">A broad search finds plausible matches for a sales play. A deeper review brings the relevant records together for each candidate so the shortlist reflects the quality of the evidence as well as the apparent fit.</p>
+
+      <ol class="steps section-gap">
+        <li><h3>1. Retrieve</h3><p>Search permitted, read-only sources for relevant passages, account notes, and usage signals.</p></li>
+        <li><h3>2. Assess</h3><p>Read the strongest candidates in more detail. Record supporting evidence, gaps, and conflicting signals.</p></li>
+        <li><h3>3. Rank and share</h3><p>Apply the play’s rubric, run quality checks, and share the ranked list with source-backed briefs.</p></li>
+      </ol>
+
+      <section class="section-gap" aria-labelledby="ranking-title">
+        <h2 id="ranking-title">What shapes the ranking</h2>
+        <dl class="criteria">
+          <div><dt>Fit</dt><dd>Does the account’s situation match the play?</dd></div>
+          <div><dt>Customer pain</dt><dd>How clearly has the customer described the problem?</dd></div>
+          <div><dt>Potential impact</dt><dd>How much could solving it change the customer’s workflow?</dd></div>
+          <div><dt>Readiness</dt><dd>Is there recent evidence that the customer can act on it?</dd></div>
+        </dl>
+        <p class="review">A model’s assessment feeds the rubric alongside the evidence. Weak or stale evidence lowers priority, and links in each brief let the seller check the reasoning against the original record.</p>
+      </section>
+
+      <section class="section-gap" aria-labelledby="quality-title">
+        <h3 id="quality-title">Checks before sharing</h3>
+        <p class="review">Hold a refresh for review if the shortlist changes unexpectedly or the evidence is too thin. Keep prior runs available for comparison. The seller decides whether to follow up and what to say.</p>
+      </section>
+
+      <section class="section-gap" aria-labelledby="sources-title">
+        <h3 id="sources-title">Public context on Postman’s sales agents</h3>
+        <ul class="source-links">
+          <li><a href="https://blog.postman.com/steer-your-agents-until-they-steer-themselves/">Postman engineering write-up</a></li>
+          <li><a href="https://www.linkedin.com/pulse/agentic-os-first-principles-approach-building-agents-get-ankit-sobti-83gjc">Agentic OS announcement</a></li>
+        </ul>
+      </section>
+      <footer class="footer-line"><a href="https://kellend.com/">Kellen Donohue</a><span>Prospect Pipeline case study</span></footer>
+    </div>
+  </section>
+</main>
+</body>
+</html>
