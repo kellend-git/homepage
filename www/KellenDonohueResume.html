@@ -6,15 +6,6 @@
 <meta name="theme-color" content="#075cd6">
 <meta name="description" content="Kellen Donohue — Senior Forward Deployed Software Engineer. AI systems, data infrastructure, enterprise deployments.">
 <title>Kellen Donohue — Resume</title><link rel="canonical" href="https://kellend.com/KellenDonohueResume.html">
-<script>
-(() => {
-  try {
-    const savedTheme = localStorage.getItem("theme");
-    const theme = savedTheme || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-    document.documentElement.dataset.theme = theme;
-  } catch (_) {}
-})();
-</script>
 <style>
 /* ===========================================================================
    Tokens lifted verbatim from kellend.com: light is :root, dark is
@@ -71,23 +62,7 @@ a:hover{text-decoration:underline; text-underline-offset:3px}
 }
 .btn-primary{ background:var(--accent); color:#fff }
 .btn-primary:hover{ background:var(--accent-hover); text-decoration:none }
-.theme-toggle{
-  position:relative; width:68px; height:42px; display:grid; grid-template-columns:1fr 1fr;
-  align-items:center; padding:3px; border:1px solid var(--line); border-radius:999px;
-  background:var(--surface); color:var(--muted); font:inherit; cursor:pointer;
-  box-shadow:inset 0 1px 2px rgba(2,15,35,.08);
-  transition:background-color 160ms,border-color 160ms,transform 160ms;
-}
-.theme-toggle:hover{ border-color:var(--blue-200); transform:translateY(-1px) }
-.theme-toggle:focus-visible{ outline:3px solid var(--blue-200); outline-offset:3px }
-.theme-thumb{
-  position:absolute; z-index:0; left:4px; top:4px; width:30px; height:30px;
-  border-radius:50%; background:var(--blue-100); box-shadow:0 2px 7px rgba(2,15,35,.16);
-  transition:transform 180ms,background-color 180ms;
-}
-[data-theme="dark"] .theme-thumb{ transform:translateX(30px) }
-.theme-option{ position:relative; z-index:1; display:grid; place-items:center; line-height:0 }
-body,.sheet,.card,.theme-toggle{ transition:background-color 180ms,border-color 180ms,color 180ms }
+body,.sheet,.card{ transition:background-color 180ms,border-color 180ms,color 180ms }
 .bar .note{ font-size:13px; color:var(--muted); margin-left:auto }
 .print-only{ display:none }
 .bar .note b{ color:var(--ink); font-weight:600 }
@@ -202,7 +177,7 @@ footer .spacer{ margin-left:auto }
   html{ -webkit-print-color-adjust:exact; print-color-adjust:exact }
   body{ background:#fff; font-size:9.5pt; line-height:1.25 }
   .sheet{ max-width:none; margin:0; padding:0; border:0; border-radius:0; box-shadow:none }
-  .bar .btn, .theme-toggle, .screen-only, footer{ display:none }
+  .bar .btn, .screen-only, footer{ display:none }
   .print-only{ display:inline }
   .bar{ margin-bottom:10px; display:block }
   .bar .note{ display:block; margin:0; font-size:8.5pt; color:var(--muted) }
@@ -241,25 +216,81 @@ footer .spacer{ margin-left:auto }
 }
 
 /* Extended web resume, preserving the site's blue and navy identity. */
-a{text-decoration:underline;text-underline-offset:3px}a.btn{text-decoration:none}.text-link{font-size:14px;font-weight:650}.sheet{max-width:1040px;padding:44px 60px 52px}.web-brand{display:flex;align-items:center;gap:12px;margin-bottom:26px;color:var(--muted);font-size:10px;font-weight:750;letter-spacing:.12em}.kd{display:grid;place-items:center;width:38px;height:38px;border-radius:8px;background:var(--accent);color:white;font-size:13px;letter-spacing:.04em}.name{color:var(--ink)}.bar .note{font-size:12px}.jump-nav{display:flex;gap:22px;flex-wrap:wrap;padding:16px 0 0;font-size:13px;font-weight:650}.metrics{display:grid;grid-template-columns:repeat(4,1fr);margin-top:28px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:22px 0;gap:16px}.metrics strong{display:block;font-family:var(--font-display);color:var(--accent-text);font-size:28px;line-height:1.2}.metrics span{font-size:12px;color:var(--muted)}.section-intro{color:var(--muted);max-width:65ch;margin-top:-6px}.project{padding:28px 0;border-bottom:1px solid var(--line)}.project h3{font-family:var(--font-display);font-size:26px;line-height:1.2;letter-spacing:-.025em;margin:8px 0 12px}.project-intro{font-size:17px;line-height:1.6;max-width:72ch;margin:0 0 20px}.project dl{display:grid;grid-template-columns:145px 1fr;gap:14px 24px;margin:0}.project dt{color:var(--accent-text);font-size:13px;font-weight:750}.project dd{margin:0;font-size:15px;color:var(--muted);line-height:1.6}.project .scope{font-size:13px;line-height:1.6;color:var(--muted);margin:22px 0 0;max-width:84ch}section{scroll-margin-top:20px}a:focus-visible,button:focus-visible{outline:3px solid var(--blue-200);outline-offset:4px}.card .links a{border:0;text-decoration:underline}.card .links a:hover{text-decoration:underline}.bar .btn{white-space:nowrap}
+a{text-decoration:underline;text-underline-offset:3px}a.btn{text-decoration:none}.text-link{font-size:14px;font-weight:650}.sheet{max-width:1040px;padding:44px 60px 52px}.web-brand{display:flex;align-items:center;gap:12px;margin-bottom:26px;color:var(--muted);font-size:10px;font-weight:750;letter-spacing:.12em}.kd{display:grid;place-items:center;width:38px;height:38px;border-radius:8px;background:var(--accent);color:white;font-size:13px;letter-spacing:.04em}.name{color:var(--ink)}.bar .note{font-size:12px}.jump-nav{display:flex;gap:22px;flex-wrap:wrap;padding:16px 0 0;font-size:13px;font-weight:650}.metrics{display:grid;grid-template-columns:repeat(4,1fr);margin-top:28px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:22px 0;gap:16px}.metrics strong{display:block;font-family:var(--font-display);color:var(--accent-text);font-size:28px;line-height:1.2}.metrics span{font-size:12px;color:var(--muted)}.section-intro{color:var(--muted);max-width:65ch;margin-top:-6px}.project{padding:4px 0 16px}.project h3{font-family:var(--font-display);font-size:26px;line-height:1.2;letter-spacing:-.025em;margin:8px 0 12px}.project-intro{font-size:17px;line-height:1.6;max-width:72ch;margin:0 0 20px}.project dl{display:grid;grid-template-columns:145px 1fr;gap:14px 24px;margin:0}.project dt{color:var(--accent-text);font-size:13px;font-weight:750}.project dd{margin:0;font-size:15px;color:var(--muted);line-height:1.6}.project .scope{font-size:13px;line-height:1.6;color:var(--muted);margin:22px 0 0;max-width:84ch}section{scroll-margin-top:20px}a:focus-visible,button:focus-visible{outline:3px solid var(--blue-200);outline-offset:4px}.card .links a{border:0;text-decoration:underline}.card .links a:hover{text-decoration:underline}.bar .btn{white-space:nowrap}
 @media(max-width:720px){.sheet{padding:24px 20px 36px}.bar{margin-bottom:26px}.bar .note{width:100%;margin:0}.metrics{grid-template-columns:1fr 1fr;gap:22px}.project dl{grid-template-columns:1fr;gap:5px}.project dd{margin-bottom:10px}.deg{flex-wrap:wrap;gap:3px 12px}.deg .where{width:100%;margin-left:60px}.jump-nav{gap:12px 20px}.web-brand{letter-spacing:.06em}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 @media print{.bar,.jump-nav,.web-brand,.metrics{display:none!important}section{break-inside:auto}.project{break-inside:avoid}.project h3{font-size:15pt}.project-intro{font-size:10pt}.project dt{font-size:9pt}.project dd{font-size:9pt}.project .scope{font-size:8pt}.sheet{padding:0}footer{display:flex;font-size:8pt}.project dl{grid-template-columns:90px 1fr}.role{break-inside:avoid}}
 
-.theme-toggle{display:inline-flex;justify-content:center;width:auto;height:38px;padding:0 13px;font-size:12px;font-weight:650;border-radius:8px;white-space:nowrap}.theme-toggle:before,.theme-toggle:after{display:none}.role-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 16px}.org .unit{white-space:nowrap}.deg .what{flex:1;min-width:0}.project details{margin-top:18px}.project summary,.reporting-detail summary{color:var(--accent-text);font-size:14px;font-weight:650;cursor:pointer;text-decoration:underline;text-underline-offset:3px}.project details[open] summary{margin-bottom:20px}.reporting-detail{margin-top:24px}.reporting-detail p{font-size:15px;color:var(--muted)}.project{padding:26px 0}.project h3{font-size:25px}.project-intro{margin-bottom:0}.bar{gap:12px}.bar .note{flex-basis:100%;margin:0}.scope{max-width:80ch}
-@media(max-width:720px){.role-head{grid-template-columns:1fr}.org .unit{white-space:normal}.deg .what{flex-basis:calc(100% - 72px)}.theme-toggle{height:36px}.project h3{font-size:23px}}
+.role-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 16px}.org .unit{white-space:nowrap}.deg .what{flex:1;min-width:0}.reporting-detail p{font-size:15px;color:var(--muted)}.project h3{font-size:25px}.project-intro{margin-bottom:0}.bar{gap:12px}.bar .note{flex-basis:100%;margin:0}.scope{max-width:80ch}
+@media(max-width:720px){.role-head{grid-template-columns:1fr}.org .unit{white-space:normal}.deg .what{flex-basis:calc(100% - 72px)}.project h3{font-size:23px}}
 @media print{details>summary{display:none}details>dl,details>p{display:block!important}.project dl{display:grid!important}}
 
 @media print{:root,[data-theme="dark"]{--page:#fff;--surface:#fff;--ink:#10213a;--muted:#576781;--accent-text:#075cd6;--line:#dbe4f0;color-scheme:light}}
+.selected-projects { display: grid; gap: 3px; margin: 14px 0 0; padding: 0 }
+.selected-projects > li { padding-left: 17px; margin: 0; max-width: none }
+.selected-projects > li::before { top: 19px }
+.selected-projects summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 9px 4px 9px 0; color: var(--accent-text); font-weight: 650; list-style: none; cursor: pointer }
+.selected-projects summary::-webkit-details-marker { display: none }
+.selected-projects summary::after { content: ""; flex: 0 0 7px; width: 7px; height: 7px; border: solid currentColor; border-width: 0 2px 2px 0; transform: rotate(45deg) }
+.selected-projects details[open] > summary::after { transform: rotate(225deg) }
+.selected-projects summary:focus-visible { outline: 3px solid var(--blue-200); outline-offset: 3px }
+.selected-projects .project h4 { margin: 20px 0 12px; font-size: 14px }
+.project-print-title { display: none }
+@media (pointer: coarse) {
+  .selected-projects summary { min-height: 44px; padding-block: 10px }
+}
+@media print {
+  .selected-projects > li { padding-left: 0 }
+  .selected-projects > li::before { display: none }
+  .selected-projects details::details-content { content-visibility: visible }
+  .project-print-title { display: block }
+}
 </style>
+<link rel="stylesheet" href="css/site-header.css">
+<script src="js/site-header.js"></script>
 </head>
 <body>
-<main class="sheet">
+<a class="site-skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <nav class="site-primary-nav" aria-label="Primary navigation">
+    <div class="site-header-inner">
+      <a class="site-brand" href="./#top" aria-label="Kellen Donohue, home">
+        <span class="site-brand-mark" aria-hidden="true">KD</span><span class="site-brand-name">Kellen Donohue</span>
+      </a>
+      <div class="site-primary-links">
+        <a class="site-link-work" href="./#work">Work</a><a href="./#research">Research</a><a href="./#education">Education</a>
+      </div>
+      <div class="site-nav-actions">
+        <button class="site-theme-toggle" type="button" role="switch" aria-label="Color theme: Light. Switch to dark mode" aria-checked="false">
+          <span class="site-theme-icon site-theme-sun" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.41M17.66 6.34l1.41-1.41"></path></svg>
+          </span>
+          <span class="site-theme-icon site-theme-moon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </span>
+        </button>
+        <div class="site-resume">
+          <a class="site-resume-pdf" href="KellenDonohueResume.pdf?v=047a08ac2746" target="_blank" rel="noopener" aria-label="Resume PDF (opens in a new tab)">Resume</a>
+          <details class="site-resume-details">
+            <summary aria-label="Resume formats">
+              <span class="site-resume-mobile-label">Resume</span>
+              <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            </summary>
+            <div class="site-resume-menu">
+              <a href="KellenDonohueResume.html" aria-current="page">Read detailed resume <small>HTML</small></a>
+              <a href="KellenDonohueResume.pdf?v=047a08ac2746" download>Download resume <small>PDF</small></a>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<main id="main" class="sheet">
 
   <div class="bar">
     <a class="btn btn-primary" href="KellenDonohueResume.pdf?v=047a08ac2746" download>Download PDF ↓</a>
-    <a class="text-link" href="#selected-work">Explore selected work</a><button class="theme-toggle" type="button" role="switch" aria-label="Color theme: Light. Switch to dark mode" aria-checked="false">
-      <span>Light / Dark</span></button>
+    <a class="text-link" href="#selected-work">Explore selected work</a>
     <div>Expanded web resume · Updated 2026-11-19</div></div>
 
   <header class="masthead">
@@ -313,7 +344,36 @@ a{text-decoration:underline;text-underline-offset:3px}a.btn{text-decoration:none
     </div>
   </section>
 
-  <section id="selected-work"><p class="eyebrow"><span class="num">02 /</span> Selected engineering work</p><h2>From delivery to production ownership.</h2><p class="section-intro">Recent work spans production infrastructure, migration safety, and the evidence needed to trust automated decisions.</p><article class="project"><p class="eyebrow">01 / Lightyear</p><h3>Production ownership and checkable savings</h3><p class="project-intro">Joined during alpha testing and progressed to cutting and promoting production releases, with shared ownership of core platform robustness.</p><details><summary>Implementation and validation</summary><dl><dt>Delivery</dt><dd>Shipped a per-person, per-session savings dashboard, session cost model, spend and savings routes, Claude Code status line, and production diagnostics.</dd><dt>Measurement</dt><dd>Built a paired-run A/B harness and grading tools comparing reported savings with bridge-versus-native execution. Reproducing internal totals established accounting consistency; paired runs supplied the independent check.</dd><dt>Reliability</dt><dd>Resolved a production crash loop caused by sidecar start order, caught a consumer-bucketing regression before release, and investigated dropped metering batches and resource-related errors.</dd><dt>Developer workflow</dt><dd>Shipped a local Kubernetes environment under kind for the control plane, data plane, and bridge, with deterministic acceptance tests requiring no paid inference or shared cluster.</dd></dl><p class="scope">Savings estimates were checked against paired native runs. Accounting agreement alone was not treated as evidence of savings accuracy.</p></details></article><article class="project"><p class="eyebrow">02 / postman-bootstrap</p><h3>A regression baseline for agentic migrations</h3><p class="project-intro">Led architecture, implementation, evaluation, and delivery from an empty repository to a published PyPI CLI, with workshop fixtures, a browser UI, and a recorded partner demo.</p><details><summary>Implementation and validation</summary><dl><dt>Behavior preservation</dt><dd>Recorded legacy API behavior as a replayable contract, then checked for silent surface drift after AWS Transform migrations.</dd><dt>Validation</dt><dd>A real transformation run produced two green checks with byte-identical output before and after transformation. In the Northwind fixture and tested setup, the gate detected 15 of 15 planted mutations; a collection authored through the standard Postman CLI path detected 4 of 15.</dd><dt>Delivery architecture</dt><dd>Moved execution to a client-side transformation skill when an AWS registration allowlist blocked the original path, removing the dependency from delivery.</dd><dt>Partner enablement</dt><dd>Prepared distribution documentation and partner messaging, then shifted effort to SI/GSI enablement while holding new feature development pending customer demand.</dd></dl><p class="scope">The 15-of-15 result applies to the Northwind fixture and tested setup, not a general detection rate. Commercial adoption was not established by quarter end.</p></details></article><article class="project"><p class="eyebrow">03 / Prospect pipeline</p><h3>Finding failures that never throw</h3><p class="project-intro">Built an eleven-domain LLM prospect-scoring pipeline exposed to Field Engineering through an MCP server, producing account leaderboards and sales briefs.</p><details><summary>Implementation and validation</summary><dl><dt>Output validation</dt><dd>Inspected score distributions and identified four silent defects: ratcheting false positives, fabricated weighting values, a fixture mismatch producing zero scores, and negative-polarity signals counted as positive coverage.</dd><dt>Correction</dt><dd>Treated affected published results as invalid, reran the analysis, and republished corrected account rankings.</dd></dl><p class="scope">Outcome scope: scoring reliability improved. Whether high-scoring accounts convert remains unproven.</p></details></article><article class="project"><p class="eyebrow">04 / Terraform provider</p><h3>Delivery through long-term ownership</h3><p class="project-intro">Delivered permissions as code for enterprise Postman deployments with 10k+ users and completed the handoff to Integrations.</p><details><summary>Implementation and validation</summary><dl><dt>Release engineering</dt><dd>Set up automated distribution builds from tagged source releases and delivered the required team-ID API change to production.</dd><dt>Handoff</dt><dd>Transferred development ownership to Integrations; the team smoke-tested end-to-end distribution through a private publish path.</dd><dt>Customer enablement</dt><dd>Prepared an annotated terraform plan walkthrough to support enterprise partner conversations.</dd></dl></details></article><details class="reporting-detail"><summary>Also: keeping Field Engineering reporting operational</summary><p>Maintained engagement reporting through Salesforce authentication disruptions, added recovery authentication modes and ingestion visibility, and began a Gong fallback using calls in a shared vector index.</p></details></section><section id="research">
+  <section id="selected-work"><p class="eyebrow"><span class="num">02 /</span> Selected engineering work</p><h2>From delivery to production ownership.</h2><p class="section-intro">Recent work spans production infrastructure, migration safety, and the evidence needed to trust automated decisions.</p>
+  <ul class="selected-projects" role="list">
+    <li>
+      <details class="selected-project">
+        <summary>Lightyear</summary>
+        <article class="project"><p class="eyebrow project-print-title">Lightyear</p><h3>Production ownership and checkable savings</h3><p class="project-intro">Joined during alpha testing and progressed to cutting and promoting production releases, with shared ownership of core platform robustness.</p><h4>Implementation and validation</h4><dl><dt>Delivery</dt><dd>Shipped a per-person, per-session savings dashboard, session cost model, spend and savings routes, Claude Code status line, and production diagnostics.</dd><dt>Measurement</dt><dd>Built a paired-run A/B harness and grading tools comparing reported savings with bridge-versus-native execution. Reproducing internal totals established accounting consistency; paired runs supplied the independent check.</dd><dt>Reliability</dt><dd>Resolved a production crash loop caused by sidecar start order, caught a consumer-bucketing regression before release, and investigated dropped metering batches and resource-related errors.</dd><dt>Developer workflow</dt><dd>Shipped a local Kubernetes environment under kind for the control plane, data plane, and bridge, with deterministic acceptance tests requiring no paid inference or shared cluster.</dd></dl><p class="scope">Savings estimates were checked against paired native runs. Accounting agreement alone was not treated as evidence of savings accuracy.</p></article>
+      </details>
+    </li>
+    <li>
+      <details class="selected-project">
+        <summary>Postman Bootstrap</summary>
+        <article class="project"><p class="eyebrow project-print-title">Postman Bootstrap</p><h3>A regression baseline for agentic migrations</h3><p class="project-intro">Led architecture, implementation, evaluation, and delivery from an empty repository to a published PyPI CLI, with workshop fixtures, a browser UI, and a recorded partner demo.</p><h4>Implementation and validation</h4><dl><dt>Behavior preservation</dt><dd>Recorded legacy API behavior as a replayable contract, then checked for silent surface drift after AWS Transform migrations.</dd><dt>Validation</dt><dd>A real transformation run produced two green checks with byte-identical output before and after transformation. In the Northwind fixture and tested setup, the gate detected 15 of 15 planted mutations; a collection authored through the standard Postman CLI path detected 4 of 15.</dd><dt>Delivery architecture</dt><dd>Moved execution to a client-side transformation skill when an AWS registration allowlist blocked the original path, removing the dependency from delivery.</dd><dt>Partner enablement</dt><dd>Prepared distribution documentation and partner messaging, then shifted effort to SI/GSI enablement while holding new feature development pending customer demand.</dd></dl><p class="scope">The 15-of-15 result applies to the Northwind fixture and tested setup, not a general detection rate. Commercial adoption was not established by quarter end.</p></article>
+      </details>
+    </li>
+    <li>
+      <details class="selected-project">
+        <summary>Prospect Pipeline</summary>
+        <article class="project"><p class="eyebrow project-print-title">Prospect Pipeline</p><h3>Finding failures that never throw</h3><p class="project-intro">Built an eleven-domain LLM prospect-scoring pipeline exposed to Field Engineering through an MCP server, producing account leaderboards and sales briefs.</p><h4>Implementation and validation</h4><dl><dt>Output validation</dt><dd>Inspected score distributions and identified four silent defects: ratcheting false positives, fabricated weighting values, a fixture mismatch producing zero scores, and negative-polarity signals counted as positive coverage.</dd><dt>Correction</dt><dd>Treated affected published results as invalid, reran the analysis, and republished corrected account rankings.</dd></dl><p class="scope">Outcome scope: scoring reliability improved. Whether high-scoring accounts convert remains unproven.</p></article>
+      </details>
+    </li>
+    <li>
+      <details class="selected-project">
+        <summary>Terraform provider</summary>
+        <article class="project"><p class="eyebrow project-print-title">Terraform provider</p><h3>Delivery through long-term ownership</h3><p class="project-intro">Delivered permissions as code for enterprise Postman deployments with 10k+ users and completed the handoff to Integrations.</p><h4>Implementation and validation</h4><dl><dt>Release engineering</dt><dd>Set up automated distribution builds from tagged source releases and delivered the required team-ID API change to production.</dd><dt>Handoff</dt><dd>Transferred development ownership to Integrations; the team smoke-tested end-to-end distribution through a private publish path.</dd><dt>Customer enablement</dt><dd>Prepared an annotated terraform plan walkthrough to support enterprise partner conversations.</dd></dl></article>
+      </details>
+    </li>
+    <li><details class="reporting-detail"><summary>Also: keeping Field Engineering reporting operational</summary><p class="eyebrow project-print-title">Keeping Field Engineering reporting operational</p><p>Maintained engagement reporting through Salesforce authentication disruptions, added recovery authentication modes and ingestion visibility, and began a Gong fallback using calls in a shared vector index.</p></details></li>
+  </ul>
+</section>
+  <section id="research">
     <p class="eyebrow"><span class="num">03 /</span> Research &amp; Invention</p>
     <h2>Research and invention.</h2>
     <div class="cards">
@@ -381,32 +441,5 @@ a{text-decoration:underline;text-underline-offset:3px}a.btn{text-decoration:none
 
 </main>
 
-<script>
-(() => {
-  const root = document.documentElement;
-  const toggle = document.querySelector(".theme-toggle");
-  const themeColor = document.querySelector('meta[name="theme-color"]');
-
-  const applyTheme = (theme) => {
-    const isDark = theme === "dark";
-    root.dataset.theme = theme;
-    toggle.setAttribute("aria-checked", String(isDark));
-    toggle.setAttribute("aria-label", `Color theme: ${isDark ? "Dark" : "Light"}. Switch to ${isDark ? "light" : "dark"} mode`);
-    themeColor.setAttribute("content", isDark ? "#07111f" : "#075cd6");
-  };
-
-  applyTheme(root.dataset.theme || "light");
-  toggle.addEventListener("click", () => {
-    const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
-    applyTheme(nextTheme);
-    try { localStorage.setItem("theme", nextTheme); } catch (_) {}
-  });
-
-  const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
-  systemTheme.addEventListener("change", (event) => {
-    try { if (!localStorage.getItem("theme")) applyTheme(event.matches ? "dark" : "light"); } catch (_) {}
-  });
-})();
-</script>
 </body>
 </html>

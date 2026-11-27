@@ -16,7 +16,11 @@
     --muted: #a9b8cd;
     --accent: #73acff;
     --link: #9bc5ff;
-    --button: #1264d5;
+    --project-highlight: #102744;
+    --project-border: #4d80be;
+    --project-glow: #143664;
+    --project-hero-start: #081523;
+    --project-hero-end: #0a1c34;
     --display: "Avenir Next", Avenir, "Trebuchet MS", sans-serif;
     --body: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   }
@@ -31,17 +35,11 @@
   a:hover { color: var(--ink); }
   a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
   .shell { width: min(100% - 3rem, 1056px); margin-inline: auto; }
-  .masthead { border-bottom: 1px solid var(--line); }
-  .masthead .shell, .footer-line { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px 24px; }
-  .masthead .shell { min-height: 74px; padding-block: 10px; }
-  .brand { display: inline-flex; align-items: center; gap: 11px; color: var(--ink); font-weight: 700; text-decoration: none; }
-  .brand-mark { display: grid; place-items: center; width: 38px; height: 38px; background: var(--button); color: #fff; border-radius: 8px; font-size: .8rem; }
-  .masthead nav { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; font-size: .9rem; }
-  .masthead nav a { text-decoration: none; font-weight: 650; }
+  .footer-line { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px 24px; }
   .pdf-link { border: 1px solid var(--line); padding: .45rem .8rem; border-radius: 8px; color: var(--ink); }
   .pdf-link:hover { border-color: var(--accent); }
   .overview, .technical { padding-block: clamp(3rem, 7vw, 5rem); }
-  .overview { border-bottom: 1px solid var(--line); background: radial-gradient(ellipse at 88% 0, #143664 0%, transparent 48%), linear-gradient(#081523, #0a1c34); }
+  .overview { border-bottom: 1px solid var(--line); background: radial-gradient(ellipse at 88% 0, var(--project-glow) 0%, transparent 48%), linear-gradient(var(--project-hero-start), var(--project-hero-end)); }
   .kicker { margin-bottom: .8rem; color: var(--accent); font-weight: 750; font-size: .875rem; letter-spacing: .105em; text-transform: uppercase; }
   .hero-subtitle { margin-top: .7rem; color: var(--accent); font: 700 clamp(1.35rem, 3vw, 2.05rem)/1.2 var(--display); letter-spacing: -.02em; }
   .lede { margin-top: .8rem; max-width: 69ch; color: var(--muted); font-size: 1.08rem; }
@@ -55,7 +53,7 @@
   .funnel-row { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: .15rem .8rem; padding-block: .48rem; border-bottom: 1px solid var(--line); }
   .funnel-row dt { color: var(--muted); }
   .funnel-row dd { color: var(--accent); font: 700 1.36rem/1.2 Arial, sans-serif; font-variant-numeric: tabular-nums; }
-  .brief { border-color: #4d80be; background: #102744; }
+  .brief { border-color: var(--project-border); background: var(--project-highlight); }
   .brief-label { margin-bottom: .35rem; color: var(--link); font-weight: 700; font-size: .87rem; }
   blockquote { margin: .8rem 0; border-left: 2px solid var(--accent); padding-left: .75rem; font-style: italic; }
   .brief dl > div + div { margin-top: .42rem; }
@@ -63,11 +61,11 @@
   .brief dt { font-weight: 700; margin-right: .35em; }
   .brief dd, .cards p, .steps p { color: var(--muted); }
   .cards, .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: .9rem; }
-  .cards > div { border-top: 2px solid #4d80be; padding-top: .8rem; }
+  .cards > div { border-top: 2px solid var(--project-border); padding-top: .8rem; }
   .cards p, .steps p { margin-top: .38rem; }
   .steps { list-style: none; padding: 0; margin-bottom: 0; }
   .steps li { border: 1px solid var(--line); border-radius: 8px; background: var(--surface); padding: 1rem; }
-  .steps li:nth-child(2) { border-color: #4d80be; background: #102744; }
+  .steps li:nth-child(2) { border-color: var(--project-border); background: var(--project-highlight); }
   .criteria { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 1.2rem; margin-top: .75rem; }
   .criteria > div { border-top: 1px solid var(--line); padding: .58rem 0; }
   .criteria dt { font-weight: 700; }
@@ -77,7 +75,6 @@
   .footer-line { margin-top: 1.4rem; border-top: 1px solid var(--line); padding-top: .7rem; color: var(--muted); font-size: .88rem; }
   @media screen and (max-width: 680px) {
     .shell { width: calc(100% - 2rem); }
-    .masthead .shell { padding-block: 13px; }
     .overview-grid, .cards, .steps { grid-template-columns: minmax(0, 1fr); }
   }
   @media screen and (max-width: 400px) {
@@ -87,8 +84,7 @@
   @media print {
     :root { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
     body { font-size: 11pt; line-height: 1.44; }
-    .masthead { display: none; }
-    .shell { width: auto; margin: 0; }
+      .shell { width: auto; margin: 0; }
     .overview, .technical { padding: .65in .68in .48in; min-height: 11in; border: 0; }
     .overview { break-after: page; }
     .technical { background: var(--page); }
@@ -109,25 +105,66 @@
     .overview-grid, .cards, .steps, .criteria, .footer-line { break-inside: avoid; }
   }
 </style>
+<link rel="stylesheet" href="css/site-header.css">
+<script src="js/site-header.js"></script>
 </head>
 <body>
-<header class="masthead">
-  <div class="shell">
-    <a class="brand" href="https://kellend.com/"><span class="brand-mark" aria-hidden="true">KD</span> Kellen Donohue</a>
-    <nav aria-label="Page navigation">
-      <a href="#overview">Overview</a>
-      <a href="#technical">Technical details</a>
-      <a class="pdf-link" href="prospect-pipeline.pdf" download>Download PDF</a>
-    </nav>
-  </div>
+<a class="site-skip-link" href="#main">Skip to content</a>
+<header class="site-header site-project-section">
+  <nav class="site-primary-nav" aria-label="Primary navigation">
+    <div class="site-header-inner">
+      <a class="site-brand" href="./#top" aria-label="Kellen Donohue, home">
+        <span class="site-brand-mark" aria-hidden="true">KD</span><span class="site-brand-name">Kellen Donohue</span>
+      </a>
+      <div class="site-primary-links">
+        <a class="site-link-work" href="./#work">Work</a><a href="./#research">Research</a><a href="./#education">Education</a>
+      </div>
+      <div class="site-nav-actions">
+        <button class="site-theme-toggle" type="button" role="switch" aria-label="Color theme: Light. Switch to dark mode" aria-checked="false">
+          <span class="site-theme-icon site-theme-sun" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.41M17.66 6.34l1.41-1.41"></path></svg>
+          </span>
+          <span class="site-theme-icon site-theme-moon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </span>
+        </button>
+        <div class="site-resume">
+          <a class="site-resume-pdf" href="KellenDonohueResume.pdf?v=047a08ac2746" target="_blank" rel="noopener" aria-label="Resume PDF (opens in a new tab)">Resume</a>
+          <details class="site-resume-details">
+            <summary aria-label="Resume formats">
+              <span class="site-resume-mobile-label">Resume</span>
+              <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="m4 6 4 4 4-4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            </summary>
+            <div class="site-resume-menu">
+              <a href="KellenDonohueResume.html">Read detailed resume <small>HTML</small></a>
+              <a href="KellenDonohueResume.pdf?v=047a08ac2746" download>Download resume <small>PDF</small></a>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <nav class="site-work-nav" aria-label="Postman work">
+    <div class="site-work-inner">
+      <span class="site-work-label">Postman work</span>
+      <a href="lightyear.html">Lightyear</a>
+      <a href="prospect-pipeline.html" aria-current="page">Prospect Pipeline</a>
+      <a href="postman-bootstrap.html">Postman Bootstrap</a>
+    </div>
+  </nav>
 </header>
-<main>
+<main id="main">
   <section class="overview" id="overview" aria-labelledby="title">
     <div class="shell">
       <p class="kicker">Postman · Sales intelligence</p>
       <h1 id="title">Prospect Pipeline</h1>
       <p class="hero-subtitle">From a book of accounts to a shortlist a seller can act on.</p>
       <p class="lede">For each sales play, the pipeline looks across account conversations, CRM notes, and product activity for a specific customer problem. It gives sellers a ranked shortlist with the evidence behind each pick and a question to ask next.</p>
+      <nav class="site-project-tools" aria-label="Project page sections">
+        <a href="#overview">Overview</a>
+        <a href="#technical">Technical details</a>
+        <a href="prospect-pipeline.pdf" download>Download PDF</a>
+      </nav>
 
       <div class="overview-grid section-gap">
         <figure class="panel" aria-labelledby="funnel-title">
