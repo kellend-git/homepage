@@ -260,7 +260,13 @@ class TestAccessibility(unittest.TestCase):
 
 class TestStyles(unittest.TestCase):
     def test_html_classes_are_defined_in_css(self):
-        css = CSS.read_text(encoding="utf-8")
+        stylesheets = [
+            WWW / local_path(value)
+            for tag, attr, value in PAGE.refs
+            if tag == "link" and attr == "href" and is_local(value)
+            and Path(local_path(value)).suffix == ".css"
+        ]
+        css = "\n".join(path.read_text(encoding="utf-8") for path in stylesheets)
         # Leading [_a-zA-Z] keeps this from matching decimals like `.8fr`.
         defined = set(re.findall(r"\.(-?[_a-zA-Z][\w-]*)", css))
         for name in sorted(PAGE.classes):
