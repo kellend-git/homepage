@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#07111f">
+<meta name="description" content="Postman Bootstrap turns recorded legacy API behavior into a repeatable release check for migrations.">
+<title>Postman Bootstrap | Kellen Donohue</title>
+<style>
+  :root {
+    color-scheme: dark;
+    --page: #07111f;
+    --surface: #0d1a2b;
+    --line: #243951;
+    --ink: #eef5ff;
+    --muted: #a9b8cd;
+    --accent: #73acff;
+    --link: #9bc5ff;
+    --button: #1264d5;
+    --warning: #ffc38e;
+    --display: "Avenir Next", Avenir, "Trebuchet MS", sans-serif;
+    --body: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--page); color: var(--ink); font: 1rem/1.6 var(--body); }
+  p, h1, h2, h3, figure, dl, dd { margin: 0; }
+  h1, h2, h3 { line-height: 1.13; font-family: var(--display); letter-spacing: -.035em; }
+  h1 { max-width: 18ch; font-size: clamp(2.75rem, 7vw, 5.2rem); }
+  h1 span { color: var(--accent); white-space: nowrap; }
+  h2 { font-size: clamp(1.75rem, 4vw, 2.6rem); }
+  h3 { font-size: 1.12rem; letter-spacing: -.015em; }
+  a { color: var(--link); text-underline-offset: .22em; }
+  a:hover { color: var(--ink); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  .shell { width: min(100% - 3rem, 1056px); margin-inline: auto; }
+  .masthead { border-bottom: 1px solid var(--line); }
+  .masthead .shell, .footer-line { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px 24px; }
+  .masthead .shell { min-height: 74px; padding-block: 10px; }
+  .brand { display: inline-flex; align-items: center; gap: 11px; color: var(--ink); font-weight: 700; text-decoration: none; }
+  .brand-mark { display: grid; place-items: center; width: 38px; height: 38px; background: var(--button); color: #fff; border-radius: 8px; font-size: .8rem; }
+  .masthead nav { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; font-size: .9rem; }
+  .masthead nav a { text-decoration: none; font-weight: 650; }
+  .pdf-link { border: 1px solid var(--line); padding: .45rem .8rem; border-radius: 8px; color: var(--ink); }
+  .pdf-link:hover { border-color: var(--accent); }
+  .overview, .technical { padding-block: clamp(3rem, 7vw, 5rem); }
+  .overview { border-bottom: 1px solid var(--line); background: radial-gradient(ellipse at 88% 0, #143664 0%, transparent 48%), linear-gradient(#081523, #0a1c34); }
+  .kicker { margin-bottom: .8rem; color: var(--accent); font-size: .875rem; font-weight: 750; letter-spacing: .105em; text-transform: uppercase; }
+  .lede { margin-top: .9rem; max-width: 69ch; color: var(--muted); font-size: 1.12rem; }
+  .section-gap { margin-top: clamp(2rem, 5vw, 3.25rem); }
+  .example { overflow: hidden; margin-top: 1.5rem; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+  .example figcaption, .result { padding: .85rem 1.2rem; }
+  .example figcaption { font-size: .94rem; color: var(--muted); }
+  .comparison { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-block: 1px solid var(--line); }
+  .comparison > div { padding: .95rem 1.2rem; }
+  .comparison > div + div { border-left: 1px solid var(--line); background: #102744; }
+  .comparison dt { font-weight: 700; }
+  .comparison dd { display: grid; gap: .2rem; margin-top: .25rem; color: var(--muted); }
+  .amount { color: var(--accent); font: 700 clamp(2rem, 5vw, 3.35rem)/1.12 Arial, sans-serif; letter-spacing: -.04em; }
+  .comparison > div + div .amount, .result strong { color: var(--warning); }
+  .result { color: var(--muted); font-size: .94rem; }
+  .result code { color: var(--ink); white-space: nowrap; }
+  .steps { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; padding: 0; margin: .9rem 0 0; }
+  .steps li { border-top: 2px solid #4d80be; padding-top: .8rem; }
+  .steps p { margin-top: .4rem; color: var(--muted); }
+  .modes { margin: .75rem 0 0; }
+  .modes > div { border-top: 1px solid var(--line); padding-top: .65rem; }
+  .modes dt { font-weight: 700; }
+  .modes dd { margin-top: .3rem; color: var(--muted); }
+  .technical code { color: var(--link); overflow-wrap: anywhere; }
+  .checks dt code { font-size: .84em; }
+  .verdicts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .8rem; margin-top: .65rem; }
+  .verdicts dt { color: var(--accent); font-weight: 700; }
+  .verdicts dd { color: var(--muted); }
+  .checks { margin-top: .8rem; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+  .checks > div { display: grid; grid-template-columns: minmax(8rem, .65fr) minmax(0, 1.35fr); gap: .2rem 1rem; padding: .72rem 1rem; }
+  .checks > div + div { border-top: 1px solid var(--line); }
+  .checks dt { color: var(--link); font-weight: 700; }
+  .checks dd, .detail { color: var(--muted); }
+  .detail { margin-top: .55rem; max-width: 78ch; }
+  .source-links { display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; list-style: none; margin: .45rem 0 0; padding: 0; }
+  .footer-line { margin-top: 1.6rem; padding-top: .7rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .88rem; }
+  @media screen and (max-width: 680px) {
+    .shell { width: calc(100% - 2rem); }
+    .masthead .shell { padding-block: 13px; }
+    .steps, .verdicts { grid-template-columns: minmax(0, 1fr); }
+    .comparison > div, .example figcaption, .result { padding-inline: .8rem; }
+    .comparison dd { font-size: .88rem; }
+    .checks > div { grid-template-columns: minmax(0, 1fr); }
+  }
+  @page { size: letter; margin: 0; }
+  @media print {
+    :root { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    body { font-size: 11pt; line-height: 1.46; }
+    .masthead { display: none; }
+    .shell { width: auto; margin: 0; }
+    .overview, .technical { min-height: 11in; padding: .65in .68in .48in; border: 0; }
+    .overview { break-after: page; }
+    .overview .section-gap { margin-top: 16pt; }
+    .technical { background: var(--page); }
+    h1 { font-size: 47pt; }
+    h2 { font-size: 24pt; }
+    h3 { font-size: 12pt; }
+    .kicker { font-size: 10pt; margin-bottom: 10pt; }
+    .lede { font-size: 12pt; }
+    .section-gap { margin-top: 19pt; }
+    .example { margin-top: 18pt; }
+    .example figcaption, .comparison > div, .result { padding: 9pt 12pt; }
+    .example figcaption, .result { font-size: 10pt; }
+    .amount { font-size: 32pt; }
+    .steps { gap: 10pt; }
+    .checks > div { padding: 6pt 9pt; }
+    .checks dt code { font-size: 9pt; }
+    .modes > div { padding-top: 5pt; }
+    .verdicts { gap: 9pt; }
+    .footer-line { font-size: 9pt; margin-top: 15pt; }
+    .example, .steps, .checks, .verdicts, .footer-line { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="shell">
+    <a class="brand" href="https://kellend.com/"><span class="brand-mark" aria-hidden="true">KD</span> Kellen Donohue</a>
+    <nav aria-label="Page navigation">
+      <a href="#overview">Overview</a>
+      <a href="#technical">Technical details</a>
+      <a class="pdf-link" href="postman-bootstrap.pdf" download>Download PDF</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <section class="overview" id="overview" aria-labelledby="title">
+    <div class="shell">
+      <p class="kicker">Postman Bootstrap · API migration</p>
+      <h1 id="title">The migration changed the fee by <span>one cent.</span></h1>
+      <p class="lede">In this example, two versions of an API calculate the same $20.645 fee before rounding. The legacy service rounds a tie to the even cent. The replacement rounds it up. Both return a valid number, so the response schema accepts either result.</p>
+
+      <figure class="example" aria-labelledby="example-caption">
+        <figcaption id="example-caption">Illustrative regression case · $412.90 balance × 5% fee</figcaption>
+        <dl class="comparison">
+          <div><dt>Recorded legacy response</dt><dd><strong class="amount">$20.64</strong>Round half to even</dd></div>
+          <div><dt>Modernized response</dt><dd><strong class="amount">$20.65</strong>Round half up</dd></div>
+        </dl>
+        <p class="result"><strong>Release check failed.</strong> The report shows <code>$.fee</code> with the recorded and returned values.</p>
+      </figure>
+
+      <section class="section-gap" aria-labelledby="workflow-title">
+        <h2 id="workflow-title">Record before you rewrite</h2>
+        <p class="lede">Postman Bootstrap turns legacy responses into a repeatable release check for continuous integration (CI).</p>
+        <ol class="steps">
+          <li><h3>1. Plan and review</h3><p>Review the OpenAPI description and choose cases for boundary values, defaults, and error paths.</p></li>
+          <li><h3>2. Capture and self-test</h3><p>Record the original before it changes. Replay the cases against it to verify the baseline.</p></li>
+          <li><h3>3. Migrate and verify</h3><p>Point the same check at the replacement and report differences in CI.</p></li>
+        </ol>
+      </section>
+
+      <section class="section-gap" aria-labelledby="modes-title">
+        <h3 id="modes-title">The legacy interface determines what you can verify</h3>
+        <dl class="steps modes">
+          <div><dt>Live comparison</dt><dd>Record responses from a running service and test the replacement with the same requests.</dd></div>
+          <div><dt>Snapshot replay</dt><dd>Capture original inputs and outputs for replay, for example through a batch or library adapter.</dd></div>
+          <div><dt>Contract only</dt><dd>Check conformance and report regression as skipped when original behavior cannot be replayed.</dd></div>
+        </dl>
+      </section>
+    </div>
+  </section>
+
+  <section class="technical" id="technical" aria-labelledby="technical-title">
+    <div class="shell">
+      <p class="kicker">Postman Bootstrap · Technical details</p>
+      <h2 id="technical-title">Keep the baseline independent of the rewrite</h2>
+      <p class="lede">A person reviews the capture plan before recording. An agent can propose cases, and the generated gate runs repeatable checks using the recorded evidence. Changes to expected behavior are reviewable in the repository.</p>
+
+      <section class="section-gap" aria-labelledby="checks-title">
+        <h3 id="checks-title">Eight checks in the release gate</h3>
+        <dl class="checks">
+          <div><dt><code>governance</code><br><code>governance-workspace</code></dt><dd>Lint the OpenAPI file with Spectral. When a workspace is configured, apply its Postman rules too.</dd></div>
+          <div><dt><code>contract</code><br><code>contract-live</code></dt><dd>Check expected responses against the mock and the running target, when each is configured.</dd></div>
+          <div><dt><code>oracle-integrity</code><br><code>corpus-spec</code></dt><dd>Check the baseline fingerprint and verify that recorded responses agree with the spec.</dd></div>
+          <div><dt><code>corpus-selftest</code><br><code>regression</code></dt><dd>Verify the recording against the original in a self-test, then compare the replacement with the same capture.</dd></div>
+        </dl>
+        <p class="detail">Comparisons start exact. Any field excluded from comparison, such as a generated timestamp, is recorded in the manifest.</p>
+      </section>
+
+      <section class="section-gap" aria-labelledby="verdicts-title">
+        <h3 id="verdicts-title">What the verdict means</h3>
+        <dl class="verdicts">
+          <div><dt>PASSED</dt><dd>All in-scope checks passed.</dd></div>
+          <div><dt>INCOMPLETE</dt><dd>A check still needs input or evidence.</dd></div>
+          <div><dt>FAILED</dt><dd>A check ran and failed.</dd></div>
+        </dl>
+        <p class="detail">The spec, recordings, collections, and environment files live in <code>postman/</code>. The generated <code>ci/gate.sh</code> runs with the Postman CLI and Spectral.</p>
+      </section>
+
+      <section class="section-gap" aria-labelledby="sources-title">
+        <h3 id="sources-title">Public sources</h3>
+        <p class="detail">The public package documents the workflow. AWS Transform custom can run it with an organization-supplied transformation definition.</p>
+        <ul class="source-links">
+          <li><a href="https://pypi.org/project/postman-bootstrap/">Postman Bootstrap on PyPI</a></li>
+          <li><a href="https://docs.aws.amazon.com/transform/latest/userguide/custom.html">AWS Transform custom documentation</a></li>
+        </ul>
+      </section>
+      <footer class="footer-line"><a href="https://kellend.com/">Kellen Donohue</a><span>Postman Bootstrap case study</span></footer>
+    </div>
+  </section>
+</main>
+</body>
+</html>
