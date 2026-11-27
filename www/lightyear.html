@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#07111f">
+<meta name="description" content="An overview of Postman Lightyear, its agent-loop architecture, and its public benchmark results.">
+<title>Lightyear | Kellen Donohue</title>
+<style>
+  :root {
+    color-scheme: dark;
+    --page: #07111f;
+    --surface: #0d1a2b;
+    --line: #243951;
+    --ink: #eef5ff;
+    --muted: #a9b8cd;
+    --accent: #73acff;
+    --link: #9bc5ff;
+    --button: #1264d5;
+    --display: "Avenir Next", Avenir, "Trebuchet MS", sans-serif;
+    --body: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-padding-top: 2rem; }
+  body { margin: 0; background: var(--page); color: var(--ink); font: 1rem/1.6 var(--body); }
+  a { color: var(--link); text-underline-offset: .22em; }
+  a:hover { color: var(--ink); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+  p, h1, h2, h3, figure, dl, dd { margin: 0; }
+  h1, h2, h3 { line-height: 1.13; font-family: var(--display); letter-spacing: -.035em; }
+  h1 { font-size: clamp(2.65rem, 7vw, 5.35rem); }
+  h2 { font-size: clamp(1.75rem, 4vw, 2.65rem); }
+  h3 { font-size: 1.13rem; letter-spacing: -.015em; }
+  .shell { width: min(100% - 3rem, 1056px); margin-inline: auto; }
+  .masthead { border-bottom: 1px solid var(--line); }
+  .masthead .shell, .footer-line {
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px 24px;
+  }
+  .masthead .shell { min-height: 74px; padding-block: 10px; }
+  .brand { display: inline-flex; align-items: center; gap: 11px; color: var(--ink); font-weight: 700; text-decoration: none; }
+  .brand-mark { display: grid; place-items: center; width: 38px; height: 38px; background: var(--button); color: white; border-radius: 8px; font-size: .8rem; }
+  .masthead nav { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 22px; font-size: .9rem; }
+  .masthead nav a { text-decoration: none; font-weight: 650; }
+  .masthead .pdf-link { border: 1px solid var(--line); padding: .45rem .8rem; border-radius: 8px; color: var(--ink); }
+  .masthead .pdf-link:hover { border-color: var(--accent); }
+  .overview { padding-block: clamp(3rem, 7vw, 5rem) clamp(3rem, 7vw, 4.75rem); border-bottom: 1px solid var(--line);
+    background: radial-gradient(ellipse at 88% 0%, #143664 0%, transparent 48%), linear-gradient(#081523, #0a1c34); }
+  .kicker { margin-bottom: .85rem; color: var(--accent); font-weight: 750; font-size: .875rem; letter-spacing: .105em; text-transform: uppercase; }
+  .hero-title { max-width: 17ch; }
+  .hero-title span { color: var(--accent); white-space: nowrap; }
+  .lede { margin-top: 1rem; max-width: 64ch; color: var(--muted); font-size: clamp(1.05rem, 2vw, 1.22rem); }
+  .section-gap { margin-top: clamp(2.2rem, 5vw, 3.4rem); }
+  .section-heading { margin-bottom: 1rem; }
+  .metrics, .flow, .detail-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .metrics { margin-top: 1rem; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+  .metrics > div { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: .32rem; padding: 1rem 1.25rem; }
+  .metrics > div + div { border-left: 1px solid var(--line); }
+  .metrics dt { font-weight: 650; }
+  .metrics dd { color: var(--accent); font: 700 clamp(2rem, 5vw, 3.35rem)/1.03 var(--display); letter-spacing: -.045em; }
+  .note, .flow p, .detail-grid p, .table-context, .footer-line { color: var(--muted); }
+  .note { margin-top: .8rem; font-size: .9rem; }
+  .flow { list-style: none; padding: 0; margin: 0; gap: 1rem; counter-reset: flow; }
+  .flow li { position: relative; border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 1rem 1.15rem 1.1rem; }
+  .flow li:nth-child(2) { border-color: #4d80be; background: #102744; }
+  .flow li::before { display: block; counter-increment: flow; content: counter(flow, decimal-leading-zero); color: var(--accent); font-size: .83rem; font-weight: 750; margin-bottom: .45rem; }
+  .flow p, .detail-grid p { margin-top: .45rem; }
+  .tech { padding-block: clamp(3rem, 7vw, 5rem); }
+  .tech .lede { font-size: 1.06rem; }
+  .detail-grid { gap: 1rem; }
+  .detail-grid > div { border-top: 2px solid #4d80be; padding-top: .9rem; }
+  .table-context { margin: .45rem 0 1rem; max-width: 73ch; }
+  .table-frame { border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  table { width: 100%; border-collapse: collapse; background: var(--surface); }
+  td { white-space: nowrap; font-family: Arial, sans-serif; font-variant-numeric: tabular-nums; }
+  th, td { padding: .62rem .85rem; text-align: right; border-bottom: 1px solid var(--line); }
+  thead th { font-size: .88rem; color: var(--link); background: #102744; }
+  th:first-child { text-align: left; }
+  tbody th { font-weight: 600; }
+  tbody td:last-child { color: var(--link); font-weight: 700; }
+  tbody tr:last-child > * { border-bottom: 0; }
+  .sources { display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; padding: 0; margin: .55rem 0 0; list-style: none; }
+  .footer-line { margin-top: 2rem; padding-top: .8rem; border-top: 1px solid var(--line); font-size: .86rem; }
+  .print-only { display: none; }
+  @media screen and (max-width: 660px) {
+    .shell { width: calc(100% - 2rem); }
+    .masthead .shell { padding-block: 13px; }
+    .flow, .detail-grid { grid-template-columns: minmax(0, 1fr); }
+    .metrics > div { padding: .75rem .55rem; }
+    .metrics dt, thead th { font-size: .78rem; line-height: 1.35; }
+    .metrics dd { font-size: clamp(1.5rem, 6.3vw, 2.6rem); }
+    th, td { padding: .58rem .32rem; font-size: .84rem; }
+  }
+  @page { size: letter; margin: 0; }
+  @media print {
+    :root { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    body { font-size: 11pt; line-height: 1.46; }
+    .masthead { display: none; }
+    .print-only { display: inline; }
+    .shell { width: auto; margin: 0; }
+    .overview, .tech { padding: .66in .68in .54in; min-height: 11in; border: 0; }
+    .overview { break-after: page; }
+    .tech { background: var(--page); }
+    .kicker { font-size: 10pt; margin-bottom: 12pt; }
+    h1 { font-size: 45pt; }
+    h2 { font-size: 24pt; }
+    h3 { font-size: 12pt; }
+    .lede, .tech .lede { font-size: 12pt; margin-top: 12pt; }
+    .section-gap { margin-top: 25pt; }
+    .section-heading { margin-bottom: 10pt; }
+    .note { font-size: 9.5pt; }
+    .metrics dd { font-size: 29pt; }
+    .metrics > div { padding: 11pt 12pt; }
+    .flow, .detail-grid { gap: 10pt; }
+    .flow li { padding: 9pt 10pt 10pt; }
+    .flow li::before { font-size: 9pt; }
+    .detail-grid > div { padding-top: 8pt; }
+    th, td { padding: 6pt 9pt; }
+    thead th { font-size: 9.5pt; }
+    .footer-line { margin-top: 17pt; padding-top: 6pt; font-size: 9pt; }
+    .metrics, .flow, .detail-grid, figure, .footer-line { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="shell">
+    <a class="brand" href="https://kellend.com/"><span class="brand-mark" aria-hidden="true">KD</span> Kellen Donohue</a>
+    <nav aria-label="Page navigation">
+      <a href="#overview">Overview</a>
+      <a href="#technical">Technical details</a>
+      <a class="pdf-link" href="lightyear.pdf" download>Download PDF</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="overview" id="overview" aria-labelledby="title">
+    <div class="shell">
+      <p class="kicker">Postman Fabric Gateway <span class="print-only"> / Overview</span></p>
+      <h1 class="hero-title" id="title">Lightyear cuts the cost of <span>agent loops.</span></h1>
+      <p class="lede">Lightyear runs between a coding agent and its model provider. It handles deterministic steps in Fabric Gateway, so the model makes fewer inference passes and the agent keeps its existing tools and permissions.</p>
+
+      <section class="section-gap" aria-labelledby="results-title">
+        <h2 id="results-title">Public benchmark results</h2>
+        <dl class="metrics">
+          <div><dt>lower cost to success</dt><dd>40%</dd></div>
+          <div><dt>less time to success</dt><dd>31%</dd></div>
+          <div><dt>higher task success rate</dt><dd>~5%</dd></div>
+        </dl>
+        <p class="note">Postman compared the same agent harnesses and models through Lightyear and directly against the provider on long-horizon benchmarks, including DeepSWE and TerminalBench 4.0. Results vary by workload. <a href="https://fabricgateway.ai/blog/lightyear-reducing-ai-spend/">Launch benchmarks</a></p>
+      </section>
+
+      <section class="section-gap" aria-labelledby="route-title">
+        <h2 class="section-heading" id="route-title">How it fits into the request path</h2>
+        <ol class="flow">
+          <li><h3>Coding agent</h3><p>The client sends requests through Fabric and runs tools under its existing permissions.</p></li>
+          <li><h3>Fabric Gateway</h3><p>Lightyear handles deterministic orchestration and reduces repeated context on the route.</p></li>
+          <li><h3>Model provider</h3><p>The existing model handles the steps that require reasoning.</p></li>
+        </ol>
+        <p class="note">Platform teams can enable Lightyear on an LLM Router route and point agents at that route. Fabric analytics estimates savings against direct provider usage at list prices. <a href="https://docs.fabricgateway.ai/configure/routing/lightyear">Routing and analytics docs</a></p>
+      </section>
+    </div>
+  </section>
+
+  <section class="tech" id="technical" aria-labelledby="tech-title">
+    <div class="shell">
+      <p class="kicker">Technical details</p>
+      <h2 id="tech-title">Where the inference savings come from</h2>
+      <p class="lede">In a conventional loop, a tool result can trigger another model request carrying the conversation so far. Lightyear’s code mode handles deterministic orchestration inside Fabric, and its cache optimizations reduce repeated context. The client still executes tools and enforces its permissions.</p>
+
+      <div class="detail-grid section-gap">
+        <div><h3>Fewer model passes</h3><p>Routine steps between model decisions can run in the gateway, reducing calls back to the model.</p></div>
+        <div><h3>Less repeated context</h3><p>The gateway can compact and restructure requests before passing them to the provider.</p></div>
+        <div><h3>Existing permissions</h3><p>Reads, edits, and other tool actions still execute on the client under its configured controls.</p></div>
+      </div>
+
+      <figure class="section-gap" aria-labelledby="example-title">
+        <figcaption>
+          <h2 id="example-title">One DeepSWE task</h2>
+          <p class="table-context" id="example-context">Adding Go embed support to yaegi with Claude Code and Claude Opus 5.5 at xhigh reasoning effort. This is one example from Postman’s launch article.</p>
+        </figcaption>
+        <div class="table-frame">
+          <table aria-labelledby="example-title" aria-describedby="example-context">
+            <thead><tr><th scope="col">Measure</th><th scope="col">Direct</th><th scope="col">Lightyear</th><th scope="col">Change</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Inference passes</th><td>76</td><td>12</td><td>-84%</td></tr>
+              <tr><th scope="row">Input tokens, including cached</th><td>11.9M</td><td>1.0M</td><td>-92%</td></tr>
+              <tr><th scope="row">Output tokens</th><td>111K</td><td>59K</td><td>-47%</td></tr>
+              <tr><th scope="row">Wall-clock time</th><td>26 min</td><td>13 min</td><td>-50%</td></tr>
+              <tr><th scope="row">Cost</th><td>$6.48</td><td>$1.94</td><td>-70%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </figure>
+
+      <section class="section-gap" aria-labelledby="sources-title">
+        <h3 id="sources-title">Public sources</h3>
+        <ul class="sources">
+          <li><a href="https://fabricgateway.ai/blog/lightyear-reducing-ai-spend/">Launch article</a></li>
+          <li><a href="https://fabricgateway.ai/product/lightyear/">Product page</a></li>
+          <li><a href="https://docs.fabricgateway.ai/configure/routing/lightyear">Routing docs</a></li>
+          <li><a href="https://www.linkedin.com/posts/agent-tasks-40-cheaper-and-31-faster-same-share-7528323543030267904-Hy6g/">LinkedIn announcement</a></li>
+          <li><a href="https://x.com/getpostman/status/2122557856591335634">X announcement</a></li>
+        </ul>
+      </section>
+      <footer class="footer-line">
+        <a href="https://kellend.com/">Kellen Donohue</a>
+        <span>Postman launch announcement · November 16, 2026</span>
+      </footer>
+    </div>
+  </section>
+</main>
+</body>
+</html>
