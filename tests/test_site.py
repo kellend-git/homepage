@@ -119,18 +119,13 @@ class TestReferences(unittest.TestCase):
                 )
 
     def test_no_absolute_local_paths(self):
-        """`/Resume.pdf` works on App Engine and 404s on GitHub Pages.
-
-        The same www/ directory is published both ways, so local references
-        have to be relative to survive on both. See CLAUDE.md.
-        """
+        """Keep local links usable from the domain and project paths."""
         for tag, attr, value in PAGE.refs:
             if is_local(value):
                 with self.subTest(ref=value):
                     self.assertFalse(
                         value.startswith("/"),
-                        f"<{tag} {attr}=\"{value}\"> is an absolute path; "
-                        "App Engine resolves it but GitHub Pages will not",
+                        f"<{tag} {attr}=\"{value}\"> must use a relative path",
                     )
 
     def test_css_local_assets_exist(self):
@@ -275,9 +270,7 @@ class TestStyles(unittest.TestCase):
 
 
 class TestPagesConfig(unittest.TestCase):
-    # www/CNAME is absent until the apex DNS is repointed at GitHub, so this
-    # check lies dormant rather than failing. It activates when the file lands.
-    @unittest.skipUnless(CNAME.exists(), "www/CNAME not present; no Pages custom domain")
+    @unittest.skipUnless(CNAME.exists(), "Pages custom domain is configured in GitHub")
     def test_cname_is_a_bare_hostname_matching_canonical(self):
         raw = CNAME.read_text(encoding="utf-8")
         lines = [line for line in raw.splitlines() if line.strip()]
